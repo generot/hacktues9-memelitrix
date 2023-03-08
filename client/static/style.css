@@ -1,20 +1,10 @@
 .background-gradient{
-	/*
-    background-color: #4EAAE3;
-    background-image: linear-gradient(315deg, #a7f58c 0%, #4EAAE3 100%);
-    color:white;
-    */
-	/*
-	background: rgb(74,48,51);
-background: linear-gradient(315deg, rgba(74,48,51,1) 19%, rgba(65,45,74,1) 43%, rgba(23,31,50,1) 81%);
-*/
  background-image: linear-gradient(to right, #171f32, #2b2438, #3c2a3b, #4b313c, #57393c);
 }
 
 .navbar-font{
     font-family: 'Bogart', serif !important;
     font-weight: 1000 !important;
-    color: #fff !important;
     font-size: 1.15em;
     letter-spacing: 0.063em;
     position: static;
@@ -36,8 +26,9 @@ background: linear-gradient(315deg, rgba(74,48,51,1) 19%, rgba(65,45,74,1) 43%, 
 }
 
 .current-page{
-	color: #60885f!important;
+	color: #9ab0a6!important;
 }
+
 .hover-underline-animation {
     display: inline-block;
     position: relative;
@@ -48,11 +39,11 @@ background: linear-gradient(315deg, rgba(74,48,51,1) 19%, rgba(65,45,74,1) 43%, 
     content: '';
     position: absolute;
     width: 100%;
-    transform: scaleX(0);
     height: 0.2em;
     bottom: 0.2em;
     left: 0;
-    background-color: #a7f58c; 
+    background-color: #00696b; 
+    transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
@@ -76,14 +67,24 @@ background: linear-gradient(315deg, rgba(74,48,51,1) 19%, rgba(65,45,74,1) 43%, 
     height: 0.2em;
     bottom: 0.2em;
     left: 0;
-    background-color: #60885f;
+    background-color: #9ab0a6;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
 }
   
+.hover-underline-animation-current:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
 
 .example {
     background-color: none;
-    overflow-y: scroll; /* Add the ability to scroll /
-    overflow-x: hidden; / Add the ability to scroll */
+    /*
+    overflow-y: visible; /* Add the ability to scroll 
+    overflow-x: scroll; /* Add the ability to scroll */
+    overflow: visible;
+    display:inline-table;
 }
 
 .example {
@@ -93,7 +94,6 @@ background: linear-gradient(315deg, rgba(74,48,51,1) 19%, rgba(65,45,74,1) 43%, 
 ::-webkit-scrollbar {
   display: none;
 }
-
 
 .homepage-heading{
     text-align: center;
