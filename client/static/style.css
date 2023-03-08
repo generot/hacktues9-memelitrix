@@ -4,8 +4,11 @@
     background-image: linear-gradient(315deg, #a7f58c 0%, #4EAAE3 100%);
     color:white;
     */
+	/*
 	background: rgb(74,48,51);
 background: linear-gradient(315deg, rgba(74,48,51,1) 19%, rgba(65,45,74,1) 43%, rgba(23,31,50,1) 81%);
+*/
+ background-image: linear-gradient(to right, #171f32, #2b2438, #3c2a3b, #4b313c, #57393c);
 }
 
 .navbar-font{
@@ -33,9 +36,8 @@ background: linear-gradient(315deg, rgba(74,48,51,1) 19%, rgba(65,45,74,1) 43%, 
 }
 
 .current-page{
-    color: #a7f58c!important;
+	color: #60885f!important;
 }
-
 .hover-underline-animation {
     display: inline-block;
     position: relative;
@@ -63,26 +65,20 @@ background: linear-gradient(315deg, rgba(74,48,51,1) 19%, rgba(65,45,74,1) 43%, 
 .hover-underline-animation-current {
     display: inline-block;
     position: relative;
-    color: #0087ca;
+    /*color: #0087ca;*/
+    color: #57393c;
 }
   
 .hover-underline-animation-current:after {
     content: '';
     position: absolute;
     width: 100%;
-    transform: scaleX(0);
     height: 0.2em;
     bottom: 0.2em;
     left: 0;
-    background-color: #404a3b;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+    background-color: #60885f;
 }
   
-.hover-underline-animation-current:hover:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
 
 .example {
     background-color: none;
