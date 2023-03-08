@@ -8,19 +8,20 @@
          
         <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <script src="../static/bootstrap/js/bootstrap.bundle.js"></script>
 </head>
 
 <body>
         <div class="background-gradient example">
-		<nav class="navbar navbar-expand-lg navbar-light" style="float:left;left:42.5%;position:relative;width:50%">
+		<nav class="navbar navbar-expand-lg navbar-light" style="float:left;position:relative;width:100vw!important;">
                         <div class="container-fluid">
-                                <a class="hover-underline-animation navbar-brand navbar-font" style="position:absolute!important;left:-82.5%!important;"href="https://github.com/generot/hacktues9-memelitrix">HARD</a>
+                                <a class="hover-underline-animation navbar-brand navbar-font" style="position:absolute;left:3vw"href="https://github.com/generot/hacktues9-memelitrix">HARD</a>
                                 <button class="navbar-toggler ml-auto custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                         <span class="navbar-toggler-icon"></span>
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                        <li class="nav-item">
+                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position:relative;float:left;left:39vw">
+                                        <li class="nav-item" >
                                                 <a class="hover-underline-animation-current current-page nav-link active navbar-font" aria-current="page">Home</a>
                                         </li>
                                         <li class="nav-item">
@@ -29,13 +30,14 @@
                                         <li class="nav-item">
                                                 <a class="hover-underline-animation  nav-link navbar-font" href="map">Map</a>
                                         </li>
-                                        <li class="nav-item dropdown" style="position:absolute!important;right:-12.5%!important;">
+                                        <li class="nav-item dropdown" style="position:relative;left:39vw!important;">
                                                 <a class="nav-link dropdown-toggle navbar-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Profile
+							Profile
                                                 </a>
-                                                <ul class="dropdown-menu navbar-font" aria-labelledby="navbarDropdown" style="float:left;">
-                                                <li><a class="hover-underline-animation dropdown-item" href="login" id="login_drop">Log in</a></li>
-                                                <li><a class="hover-underline-animation dropdown-item" href="register" id="register_drop">Sign up</a></li>
+
+                                                <ul class="dropdown-menu navbar-font" aria-labelledby="navbarDropdown" style="background-color:#57393c!important;text-align:right">
+                                                <li><a class="hover-underline-animation dropdown-item" style="color:white;float:right" href="login" id="login_drop">Log in</a></li>
+                                                <li><a class="hover-underline-animation dropdown-item" style="color:white;float:right" href="register" id="register_drop">Sign up</a></li>
                                                 </ul>
                                         </li>
                                         </ul>
@@ -43,5 +45,8 @@
                         </div>
                 </nav>
 	</div>
+	<script src="../js/requests.js"></script>
+        <script src="../js/profile_details.js"></script>
+        <script>editAfterLogin();</script>	
                 <br><br><br>
 </body>
