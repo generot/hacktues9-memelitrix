@@ -1,3 +1,7 @@
+.dropdown-item:hover{
+	background-color: #57393c;
+}
+
 .background-gradient{
  background-image: linear-gradient(to right, #171f32, #2b2438, #3c2a3b, #4b313c, #57393c);
 }
@@ -56,7 +60,6 @@
 .hover-underline-animation-current {
     display: inline-block;
     position: relative;
-    /*color: #0087ca;*/
     color: #57393c;
 }
   
