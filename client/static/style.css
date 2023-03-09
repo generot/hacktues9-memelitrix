@@ -3,7 +3,7 @@
 }
 
 .background-gradient{
- background-image: linear-gradient(to right, #171f32, #2b2438, #3c2a3b, #4b313c, #57393c);
+ background-image: linear-gradient(to right bottom, #171f32, #2b2438, #3c2a3b, #4b313c, #57393c);
 }
 
 .navbar-font{
