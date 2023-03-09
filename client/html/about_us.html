@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <title>HARD</title>
          
-        <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="../static/style.css">
-        <link rel="stylesheet" type="text/css" href="../static/about_us.css">
-        <script src="../static/bootstrap/js/bootstrap.bundle.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/about_us.css') }}">
+	<script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.bundle.js') }}"></script>
 </head>
 
 <body style="overflow:hidden;">
@@ -43,9 +43,6 @@
                         </div>
                 </nav>
 	</div>
-	<script src="../js/requests.js"></script>
-        <script src="../js/profile_details.js"></script>
-        <script>editAfterLogin();</script>	
 
 	<div class="card" style="margin-left:3.75vw;">
 		<img src="../images/sasho.jpg" >
@@ -86,4 +83,8 @@
 			<h4> Map API </h4>
 		</div>
 	</div>
+
+	<script src="{{ url_for('js', filename='/requests/js') }}"></script>
+	<script src="{{ url_for('js', filename='/profile_details.js') }}"></script>
+        <script>editAfterLogin();</script>	
 </body>
