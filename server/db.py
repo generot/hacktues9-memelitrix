@@ -4,6 +4,8 @@ import os
 from bson import ObjectId
 from dotenv import load_dotenv
 import json
+import random
+import string
 
 load_dotenv()
 uri = os.environ["MONGODB_URI"]
@@ -13,6 +15,11 @@ db = client["data"]
 users = db["users"]
 break_ins = db["break_ins"]
 devices = db["devices"]
+
+
+def generate_random_string():
+    characters = string.ascii_letters + string.digits + string.punctuation
+    return ''.join(random.choice(characters) for i in range(20))
 
 
 def add_user(username, password):
@@ -25,10 +32,13 @@ def add_user(username, password):
     password = password.encode()
     salt = 32*b'\x00'
     password_hash = hashlib.pbkdf2_hmac('sha256', password, salt, 100000)
+    API_key = generate_random_string()
 
     # insert user
     _id = users.insert_one(
-        {'name': username, 'password': password_hash, 'device_ids': None})
+        {'name': username, 'password': password_hash,
+            'device_ids': None, 'API_key': API_key}
+    )
 
     return {"code": 200, "message": "User registered successfully", "id": str(_id.inserted_id)}
 
@@ -42,7 +52,7 @@ def check_user(username, password):
                 'sha256', password, salt, 100000)
 
             if i["password"] == password_hash:
-                return {"code": 200, "message": "User logged in successfully", "username": i["name"], "id": str(i["_id"])}
+                return {"code": 200, "message": "User logged in successfully", "username": i["name"], "id": str(i["_id"]), "API_key": str(i["API_key"])}
             else:
                 return {"code": 400, "message": "Username or password is incorrect"}
 
@@ -76,8 +86,12 @@ def add_device(id, owner_id, lat, lon):
         if i["id"] == id:
             return {"code": 400, "message": "Device already registered"}
 
+    API_key = generate_random_string()
+
     devices.insert_one(
-        {'id': id, 'owner_id': owner_id, 'lat': lat, 'lon': lon})
+        {'id': id, 'owner_id': owner_id, 'lat': lat,
+            'lon': lon, 'API_key': str(API_key)}
+    )
 
     return {"code": 200, "message": "Device registered successfully"}
 
@@ -102,7 +116,42 @@ def check_device(device_id, check_owner=True):
     return 0
 
 
+def get_user_API_key_by_ID(id):
+    for i in users.find({}):
+        if i["_id"] == ObjectId(id):
+            return i["API_key"]
+
+    return None
+
+
+def get_device_API_key_by_ID(id):
+    for i in devices.find({}):
+        if i["id"] == id:
+            return i["API_key"]
+
+    return None
+
+
+def check_device_api_key(API_key):
+    for i in devices.find({}):
+        if i["API_key"] == API_key:
+            return 1
+
+    return 0
+
+
+def check_user_api_key(API_key):
+    for i in users.find({}):
+        if i["API_key"] == API_key:
+            return 1
+
+    return 0
+
+
 def add_owner(device_id, owner_id):
+    if check_device_api_key(get_device_API_key_by_ID(device_id)) == 0:
+        return {"code": 403, "message": "Permission denied"}
+
     if check_owner(owner_id) == 0:
         return {"code": 404, "message": "User not found"}
 
@@ -126,7 +175,7 @@ def add_owner(device_id, owner_id):
     return {"code": 200, "message": "Owner added successfully"}
 
 
-def add_break_in(device_id):
+def add_break_in(device_id, API_key):
     if check_device(device_id, False) == 0:
         return {"code": 404, "message": "Device not found"}
 
