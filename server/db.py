@@ -148,6 +148,20 @@ def check_user_api_key(API_key):
     return 0
 
 
+def get_user_by_API_key(API_key):
+    for i in users.find({}):
+        if i["API_key"] == API_key:
+            return i
+        
+    return None
+
+def get_device_by_ID(id):
+    for i in devices.find({}):
+        if i["id"] == id:
+            return i
+        
+    return None
+
 def add_owner(device_id, owner_id):
     if check_device_api_key(get_device_API_key_by_ID(device_id)) == 0:
         return {"code": 403, "message": "Permission denied"}
@@ -176,8 +190,11 @@ def add_owner(device_id, owner_id):
 
 
 def add_break_in(device_id, API_key):
-    if check_device(device_id, False) == 0:
-        return {"code": 404, "message": "Device not found"}
+    if check_device_api_key(API_key) == 0:
+        return {"code": 403, "message": "Permission denied"}
+    
+    if get_device_by_ID(device_id)["API_key"] != API_key:
+        return {"code": 403, "message": "Permission denied!"}
 
     for i in devices.find({}):
         if i["id"] == device_id:
