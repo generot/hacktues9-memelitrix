@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang = "en">
 <head>
@@ -9,22 +8,22 @@
          
         <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="../static/style.css">
-        <link rel="stylesheet" type="text/css" href="../static/login.css">
+        <link rel="stylesheet" type="text/css" href="../static/about_us.css">
         <script src="../static/bootstrap/js/bootstrap.bundle.js"></script>
 </head>
 
-<body style="background-color:#556989;">
-        <div class="background-gradient example">
+<body style="overflow:hidden;">
+        <div class="background-gradient example" >
 		<nav class="navbar navbar-expand-lg navbar-light" style="float:left;position:relative;width:100vw!important;">
                         <div class="container-fluid">
                                 <a class="text-white hover-underline-animation navbar-brand navbar-font" style="position:absolute;left:4vw"href="https://github.com/generot/hacktues9-memelitrix">HARD</a>
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position:relative;float:left;left:42vw">
-                                        <li class="nav-item" >
+                                        <li class="nav-item">
                                                 <a class="text-white hover-underline-animation nav-link navbar-font" href="index.html">Home</a>
                                         </li>
-                                        <li class="nav-item">
-                                                <a class="text-white hover-underline-animation nav-link navbar-font" href="about_us.html">About us</a>
+                                        <li class="nav-item" >
+                                                <a class="text-white hover-underline-animation-current current-page nav-link active navbar-font" aria-current="page">About us</a>
                                         </li>
                                         <li class="nav-item">
                                                 <a class="text-white hover-underline-animation  nav-link navbar-font" href="map.html">Map</a>
@@ -36,7 +35,7 @@
 
                                                 <ul class="dropdown-menu navbar-font" aria-labelledby="navbarDropdown" style="background-color:#57393c!important;text-align:right">
                                                 <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="login.html" id="login_drop">Log in</a></li>
-                                                <li><a class="text-white hover-underline-animation-current current-page dropdown-item" style="float:right" aria-current="paige" id="register_drop">Sign up</a></li>
+                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="register.html" id="register_drop">Sign up</a></li>
                                                 </ul>
                                         </li>
                                         </ul>
@@ -44,19 +43,48 @@
                         </div>
                 </nav>
 	</div>
-
-	<div class="center-block">
-            <div class="form_text" id="login_box" style="justify-content:center;">
-
-		<div> <img src="../images/avatar.jpg" style="border-radius:50%; height:13.5vh; width:7vw;"> </div>
-		<input type="text" placeholder="Username" name="uname" required="" id="usernm"><br>
-		<input type="password" placeholder="Password" name="pswrd" required="" id="pass"><br>
-		<input type="password" placeholder="Confirm Password" name="pswrd" required="" id="pass"><br>
-
-            <button style="margin-top:4vh;" class="submit submit-underline " onclick="login(document.getElementById('login_box'))">Register</button><br>
-        </div>
-
 	<script src="../js/requests.js"></script>
         <script src="../js/profile_details.js"></script>
         <script>editAfterLogin();</script>	
+                <br><br><br>
+
+	<div class="card" style="margin-left:3.75vw;">
+		<img src="../images/sasho.jpg" >
+		<div class="desc">
+			<h3> Алекс Огнянов </h3>
+			<h4> Back End </h4>
+		</div>
+	</div>
+
+	<div class="card" >
+		<img src="../images/sasho.jpg" >
+		<div class="desc">
+			<h3> Димитър Николов </h3>
+			<h4> Front End </h4>
+		</div>
+	</div>
+
+	<div class="card" >
+		<img src="../images/sasho.jpg" >
+		<div class="desc">
+			<h3> Мартин Наков </h3>
+			<h4> Embedded </h4>
+		</div>
+	</div>
+
+	<div class="card" >
+		<img src="../images/sasho.jpg" >
+		<div class="desc">
+			<h3> Венелин Новаков </h3>
+			<h4> Mobile App </h4>
+		</div>
+	</div>
+
+	<div class="card" >
+		<img src="../images/sasho.jpg" >
+		<div class="desc">
+			<h3> Емил Дойчинов </h3>
+			<h4> Map API </h4>
+		</div>
+	</div>
 </body>
