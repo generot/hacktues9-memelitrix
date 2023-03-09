@@ -1,3 +1,7 @@
+.dropdown-item:hover{
+	background-color: #57393c;
+}
+
 .background-gradient{
  background-image: linear-gradient(to right, #171f32, #2b2438, #3c2a3b, #4b313c, #57393c);
 }
@@ -26,7 +30,7 @@
 }
 
 .current-page{
-	color: #9ab0a6!important;
+	color: #bea5ab!important;
 }
 
 .hover-underline-animation {
@@ -42,7 +46,7 @@
     height: 0.2em;
     bottom: 0.2em;
     left: 0;
-    background-color: #00696b; 
+    background-color: #556989; 
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
@@ -56,7 +60,6 @@
 .hover-underline-animation-current {
     display: inline-block;
     position: relative;
-    /*color: #0087ca;*/
     color: #57393c;
 }
   
@@ -67,7 +70,7 @@
     height: 0.2em;
     bottom: 0.2em;
     left: 0;
-    background-color: #9ab0a6;
+    background-color: #bea5ab;
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;

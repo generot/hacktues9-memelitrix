@@ -108,3 +108,4 @@ def add_owner(device_id, owner_id):
     devices.update_one(device_schema, values)
 
     return {"code": 200, "message": "Owner added successfully"}
+
