@@ -32,7 +32,7 @@ async function getFromRoute(route, method = "GET") {
     return null;
 }
 
-//f("url/end", [["user", "vankata"]])
+//f("url/end", [["user", "vankata"], ["password", "kur za komnitko"]])
 function queryStringParams(url, args) {
     let query = url + "?";
     for (let i = 0; i < args.length; i++) {

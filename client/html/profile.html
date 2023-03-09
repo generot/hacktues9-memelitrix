@@ -70,13 +70,15 @@
 
 			<h2 onclick="change('map1')" class="text-white" style="text-align:center;"> Device: 123 </h2>
 
-			<div class="map1" id="map" style="display:none; width:440.75px; height:250px;padding-bottom: 0vw;border-radius:15px;">
-				<script src = "../static/js/map.js"></script>
+			<div class="map1 "style="display:none; width:44.75vw; height:25vh; padding-bottom: 0vw;border-radius:15px;">
+				<div id="map" style="width: 100%; height: 100%; padding-bottom: 0vw;border-radius:15px;"></div>
+				<!-- <script src="{{ url_for('static', filename='/js/map.js') }}"></script> -->
 			</div>
 		</div>
 	</div>
 
 	<script src="../js/requests.js"></script>
         <script src="../js/profile_details.js"></script>
+		<script src="{{ url_for('static', filename='/js/map.js') }}"></script>
 	<!-- <script>editAfterLogin();</script>	-->
 </body>

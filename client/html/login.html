@@ -43,20 +43,19 @@
                         </div>
                 </nav>
 	</div>
-	<script src="../js/requests.js"></script>
-        <script src="../js/profile_details.js"></script>
-        <script>editAfterLogin();</script>	
 
 	<div class="center-block" >
-            <div class="form_text" id="login_box" style="justify-content:center;">
-		<div> <img src="../static/images/avatar.jpg" style="border-radius:50%; height:17.5vh; width:9vw;"> </div>
-            <input type="text" placeholder="Username" name="uname" required="" id="usernm"><br>
+            <form class="form_text" id="login_form" style="justify-content:center;">
+		<div> <img src="../images/avatar.jpg" style="border-radius:50%; height:17.5vh; width:9vw;"> </div>
+            <input type="text" placeholder="Username" name="uname" required="" id="username"><br>
 
-		<input type="password" placeholder="Password" name="pswrd" required="" id="pass"><br>
-            <button style="margin-top:7vh;" class="submit submit-underline " onclick="login(document.getElementById('login_box'))">Login</button><br>
+		<input type="password" placeholder="Password" name="pswrd" required="" id="password"><br>
+            <button style="margin-top:7vh;" class="submit submit-underline " >Login</button><br>
+            </form>
         </div>
+        <script src="{{ url_for('static', filename='/js/requests.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/login.js') }}"></script>
+
 
 	<!-- <script src="{{ url_for('static', filename = 'js/profile_details.js') }}"></script> -->
-        <script>editAfterLogin();</script>
-
 </body>

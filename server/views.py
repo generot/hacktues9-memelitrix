@@ -20,9 +20,9 @@ def map_page():
 def about_us_page():
     return render_template("about_us.html")
 
-# @views.route("/login")
-# def login_page():
-#     return render_template("login.html")
+@views.route("/login")
+def login_page():
+    return render_template("login.html")
 
 
 @views.route("/register")

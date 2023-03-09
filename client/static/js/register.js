@@ -1,44 +1,46 @@
-const route = "/user/register"
 
-async function register(form) {
-	let user = {
-		username: form.querySelector("#usernm").value,
-		password: form.querySelector("#pass").value
-	};
 
-	if(user.username.length <= 4 || user.username.length >= 25){
-		alert("Username must be between 4 and 25 characters.");
-		window.location.replace("/register");
-	}
+const form = document.getElementById('register_form');
+const username_field = document.getElementById('username');
+const password_field = document.getElementById('password');
+const confirm_password_field = document.getElementById('confirm_password');
 
-	let response = null;
+if(localStorage.getItem("API_KEY")){
+	window.location.href = "/map";
+}
 
-	try {
-		response = await sendToRoute(user, route);
-	} catch(err) {
-		console.log(err);
+function clear_form(){
+	username_field.value = '';
+	password_field.value='';
+	confirm_password_field.value='';
+}
+
+form.addEventListener("submit", async function(event){
+	event.preventDefault();
+	var username = username_field.value;
+	var password = password_field.value;
+	var confirm_password = confirm_password_field.value;
+	if(password !== confirm_password ){
+		alert("password missmatch");
+		clear_form();
 		return;
 	}
 
-	let obj = await response.json();
+	if(username.length <= 4 || username.length >= 25){
+			alert("Username must be between 4 and 25 characters.");
+		 	clear_form();
+			return;
+	}
 
-	if(obj["code"] == 200) {
-		//Redirect to profile
-		alert("Sign up successful.");
-		window.location.replace("/");
-	} else {
-		alert("User already exists.");
-		window.location.replace("/register");
-	}
-}
-async function verifyAndRegister(form){
-	let pass = {
-		password1: form.querySelector("#pass").value,
-		password2: form.querySelector("#Cpass").value
-	};
-	if(pass.password1 == pass.password2){
-		await register(form);
-	}else{
-		alert("Passwords don't match");
-	}
-}
+	if(password.length <= 4 || password.length >= 25){
+		alert("Password must be between 4 and 25 characters.");
+		clear_form();
+		return;
+	}	
+	
+	var resp = await getFromRoute(queryStringParams("/register", [["username", username], ["password", password]]), "POST");
+	localStorage.setItem("API_KEY", resp.API_key);
+    localStorage.setItem("USER_ID", resp.id);
+    window.location.href = "/map";
+
+})
