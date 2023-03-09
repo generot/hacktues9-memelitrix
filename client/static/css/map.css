@@ -13,3 +13,20 @@
   width: 20px;
   height: 20px;
 }
+
+.device_card {
+  display:inline-block; 
+  background-color:#171f32; 
+  width:13vw; 
+  margin: 5vh 3.5vw; 
+  border-radius:15px; 
+  border-style: solid; 
+  border-color: white; 
+  border-width: 0.25em; 
+  max-height:30.5vh;
+}
+
+.device_card > h3{
+  text-align:center;
+  color : white;
+}
