@@ -30,7 +30,7 @@
 }
 
 .current-page{
-	color: #9ab0a6!important;
+	color: #bea5ab!important;
 }
 
 .hover-underline-animation {
@@ -46,7 +46,7 @@
     height: 0.2em;
     bottom: 0.2em;
     left: 0;
-    background-color: #00696b; 
+    background-color: #556989; 
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
@@ -70,7 +70,7 @@
     height: 0.2em;
     bottom: 0.2em;
     left: 0;
-    background-color: #9ab0a6;
+    background-color: #bea5ab;
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
