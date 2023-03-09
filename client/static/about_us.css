@@ -1,7 +1,7 @@
 .card {
 	height: 45vh;
 	width: 15vw;
-	margin: 10vh 1.85vw;
+	margin: 15vh 1.85vw;
 	display:inline-block;
 	position:relative;
 	transition: width 0.75s, height 0.75s;
