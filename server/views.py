@@ -8,7 +8,11 @@ views = Blueprint("views", "views")
 
 @views.route("/")
 def home():
+<<<<<<< HEAD
     return render_template("index.html")
+=======
+    return render_template("start.html")
+>>>>>>> fbb27ddc8c350e241b4dbb9d422419586b8e200d
 
 
 @views.route("/map")
@@ -110,5 +114,14 @@ def add_break_in():
 def get_break_in():
     data = request.args.to_dict()
     device_id = data["id"]
+    API_key = data["API_key"]
 
-    return json.dumps(db.get_break_ins(device_id))
+    return json.dumps(db.get_break_ins(device_id, API_key))
+
+@views.route("/getDevices", methods=["GET"])
+@cross_origin()
+def get_devices_for_user():
+    data = request.args.to_dict()
+    API_key = data["API_key"]
+
+    return db.get_devices_for_user(API_key)
