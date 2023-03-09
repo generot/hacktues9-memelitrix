@@ -40,7 +40,7 @@ def add_user(username, password):
             'device_ids': None, 'API_key': API_key}
     )
 
-    return {"code": 200, "message": "User registered successfully", "id": str(_id.inserted_id)}
+    return {"code": 200, "message": "User registered successfully", "id": str(_id.inserted_id), "API_key": API_key}
 
 
 def check_user(username, password):

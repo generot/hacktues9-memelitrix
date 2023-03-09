@@ -50,7 +50,7 @@ def register():
     return db.add_user(username, password)
 
 
-@views.route("/login", methods=["GET"])
+@views.route("/login", methods=["POST"])
 def login():
     data = request.args.to_dict()
     username = data["username"]
