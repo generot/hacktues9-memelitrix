@@ -100,8 +100,9 @@ def add_break_in():
     data = request.args.to_dict()
 
     device_id = data["id"]
+    API_key = data["API_key"]
 
-    return db.add_break_in(device_id)
+    return db.add_break_in(device_id, API_key)
 
 
 @views.route("/getBreakIns", methods=["GET"])
