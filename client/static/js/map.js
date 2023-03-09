@@ -1,7 +1,7 @@
-function InitMarker(longitude, latitude){
+function InitMarker(longitude, latitude, class_name){
     
     var iconElement = document.createElement('div');
-    iconElement.className = 'marker';
+    iconElement.className = class_name;
 
     var marker = new tt.Marker({
         element: iconElement
@@ -22,7 +22,7 @@ const Markers = []
 
 function generateMarkers(){
     for(let i = 0; i < 10; i++){
-        var marker = InitMarker(Math.random()*90, Math.random()*90)
+        var marker = InitMarker(Math.random()*90, Math.random()*90, 'intrusion_marker')
         Markers[i] = marker;
     }
 }
@@ -46,6 +46,9 @@ async function initMap(Markers){
 
     //map.addControl(new tt.FullscreenControl());
     map.addControl(new tt.NavigationControl());
+    
+    let marker = await InitMarker(position.coords.longitude, position.coords.latitude, 'user_marker');
+    marker.addTo(map);
 
     if(Markers){
         Markers.forEach(marker => marker.addTo(map))
