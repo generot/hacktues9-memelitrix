@@ -1,14 +1,49 @@
 <html>
   <head>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css"
-    />
+    <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
     <link rel="stylesheet" href="../css/map.css">
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <script src="../static/bootstrap/js/bootstrap.bundle.js"></script>
   </head>
+
   <body style="width: 100% height : 100%; margin : 0; padding: 0">
+        <div class="background-gradient example" >
+		<nav class="navbar navbar-expand-lg navbar-light" style="float:left;position:relative;width:100vw!important;">
+                        <div class="container-fluid">
+                                <a class="text-white hover-underline-animation navbar-brand navbar-font" style="position:absolute;left:4vw"href="https://github.com/generot/hacktues9-memelitrix">HARD</a>
+                                        <span class="navbar-toggler-icon"></span>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position:relative;float:left;left:39vw">
+                                        <li class="nav-item" >
+                                                <a class="text-white hover-underline-animation nav-link navbar-font" href="index.html">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="text-white hover-underline-animation nav-link navbar-font" href="about_us">About us</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a  class="text-white hover-underline-animation-current current-page nav-link active navbar-font" aria-current="paige">Map</a>
+                                        </li>
+                                        <li class="nav-item dropdown" style="position:relative;left:39vw!important;">
+                                                <a class="text-white nav-link dropdown-toggle navbar-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Profile
+                                                </a>
+
+                                                <ul class="dropdown-menu navbar-font" aria-labelledby="navbarDropdown" style="background-color:#57393c!important;text-align:right">
+                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="login" id="login_drop">Log in</a></li>
+                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="register" id="register_drop">Sign up</a></li>
+                                                </ul>
+                                        </li>
+                                        </ul>
+                                </div>
+                        </div>
+                </nav>
+	</div>
+	<script src="../js/requests.js"></script>
+        <script src="../js/profile_details.js"></script>
+        <script>editAfterLogin();</script>	
     <div id="map" style="width: 100%; height: 100%;"></div>
     <script src = "../static/js/map.js"></script>
     <script src = "../static/js/marker.js"></script>
