@@ -207,9 +207,15 @@ def add_break_in(device_id, API_key):
     return {"code": 404, "message": "Could not find device"}
 
 
-def get_break_ins(device_id):
+def get_break_ins(device_id, user_API_key):
     if check_device(device_id, False) == 0:
         return {"code": 404, "message": "Device not found"}
+    
+    if check_user_api_key(user_API_key) == 0:
+        return {"code": 404, "message": "User not found"}
+
+    if ObjectId(get_device_by_ID(device_id)["owner_id"]) != get_user_by_API_key(user_API_key)["_id"]:
+        return {"code": 403, "message": "Permission denied"}
 
     breaks = []
     index = 0
@@ -226,3 +232,11 @@ def get_break_ins(device_id):
         index += 1
 
     return {"code": 200, "break_ins": breaks}
+
+def get_devices_for_user(API_key):
+    if check_user_api_key(API_key) == 0:
+        return {"code": 404, "message": "User not found"}
+    
+    user = get_user_by_API_key(API_key)
+
+    return {"code": 200, "message": "Successfully GOT the owned devices for user", "device_ids": user["device_ids"] }
