@@ -219,7 +219,11 @@ def get_break_ins(device_id, user_API_key):
 
     breaks = []
 
-    breaks.append(get_device_by_ID(device_id))
+    device = get_device_by_ID(device_id)
+    breaks.append(
+                {"device_id": device_id,
+                "lat": device["lat"], "lon": device["lon"]}
+            )
 
     for i in break_ins.find({}):
         if i["device_id"] != device_id:
