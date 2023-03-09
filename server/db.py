@@ -93,7 +93,7 @@ def add_device(id, owner_id, lat, lon):
             'lon': lon, 'API_key': str(API_key)}
     )
 
-    return {"code": 200, "message": "Device registered successfully"}
+    return {"code": 200, "message": "Device registered successfully", "API_key": str(API_key)}
 
 
 def check_owner(owner_id):
