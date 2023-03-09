@@ -19,21 +19,27 @@ function sendToRoute(jsonData, route) {
  * @param {String} route 
  * @returns 
  */
-async function getFromRoute(route) {
+async function getFromRoute(route, method = "GET") {
     const resp = await fetch(route, {
+        method: method,
         mode: "no-cors"
     });
 
-    return resp.json();
-} 
+    if (resp.ok) {
+        return await resp.json();
+    }
 
+    return null;
+}
+
+//f("url/end", [["user", "vankata"]])
 function queryStringParams(url, args) {
     let query = url + "?";
-    for(let i = 0; i < args.length; i++) {
+    for (let i = 0; i < args.length; i++) {
         let param = args[i];
         query += param[0] + "=" + param[1];
 
-        if(i < args.length - 1)
+        if (i < args.length - 1)
             query += "&";
     }
 
