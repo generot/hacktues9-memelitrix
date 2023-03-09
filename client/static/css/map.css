@@ -1,0 +1,15 @@
+.intrusion_marker {
+    background-image: url("../../images/reddot.png");
+     background-size: contain; 
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+  }
+
+.user_marker{
+    background-image: url("../../images/bluedot.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
