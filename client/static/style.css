@@ -83,9 +83,6 @@
 
 .example {
     background-color: none;
-    /*
-    overflow-y: visible; /* Add the ability to scroll 
-    overflow-x: scroll; /* Add the ability to scroll */
     overflow: visible;
     display:inline-table;
 }

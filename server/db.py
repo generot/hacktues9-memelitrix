@@ -218,18 +218,15 @@ def get_break_ins(device_id, user_API_key):
         return {"code": 403, "message": "Permission denied"}
 
     breaks = []
-    index = 0
+
+    breaks.append(get_device_by_ID(device_id))
 
     for i in break_ins.find({}):
-        breaks.append(
-            {"device_id": i["device_id"],
-             "lat": i["lat"], "lon": i["lon"]}
-        )
-
-        if i["device_id"] == device_id:
-            breaks[0], breaks[index] = breaks[index], breaks[0]
-
-        index += 1
+        if i["device_id"] != device_id:
+            breaks.append(
+                {"device_id": i["device_id"],
+                "lat": i["lat"], "lon": i["lon"]}
+            )
 
     return {"code": 200, "break_ins": breaks}
 
