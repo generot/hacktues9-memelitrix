@@ -5,10 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <title>HARD</title>
-         
-        <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="../static/style.css">
-        <script src="../static/bootstrap/js/bootstrap.bundle.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+	<script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.bundle.js') }}"></script>
 </head>
 
 <body>
@@ -42,7 +42,8 @@
                         </div>
                 </nav>
 	</div>
-	<script src="../js/requests.js"></script>
-        <script src="../js/profile_details.js"></script>
+
+	<script src="{{ url_for('js', filename='/requests/js') }}"></script>
+	<script src="{{ url_for('js', filename='/profile_details.js') }}"></script>
         <script>editAfterLogin();</script>	
 </body>
