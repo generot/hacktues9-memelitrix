@@ -13,8 +13,3 @@
   width: 20px;
   height: 20px;
 }
-
-.mapboxgl-canvas{
-  width : 100% !important ;
-  height : 100% !important ; 
-}
