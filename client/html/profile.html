@@ -1,26 +1,28 @@
-
 <!DOCTYPE html>
 <html lang = "en">
 <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <title>HARD</title>
-         
-        <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="../static/style.css">
-        <link rel="stylesheet" type="text/css" href="../static/login.css">
-        <script src="../static/bootstrap/js/bootstrap.bundle.js"></script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HARD</title>
+
+	<link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
+	<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
+	<link rel="stylesheet" href="../static/css/map.css">
+
+	<link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+	<script src="../static/bootstrap/js/bootstrap.bundle.js"></script>
 </head>
 
-<body style="background-color:#556989;">
-        <div class="background-gradient example">
+<body>
+        <div class="background-gradient example" >
 		<nav class="navbar navbar-expand-lg navbar-light" style="float:left;position:relative;width:100vw!important;">
                         <div class="container-fluid">
                                 <a class="text-white hover-underline-animation navbar-brand navbar-font" style="position:absolute;left:4vw"href="https://github.com/generot/hacktues9-memelitrix">HARD</a>
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position:relative;float:left;left:42vw">
-                                        <li class="nav-item" >
+                                        <li class="nav-item">
                                                 <a class="text-white hover-underline-animation nav-link navbar-font" href="index.html">Home</a>
                                         </li>
                                         <li class="nav-item">
@@ -30,13 +32,13 @@
                                                 <a class="text-white hover-underline-animation  nav-link navbar-font" href="map.html">Map</a>
                                         </li>
                                         <li class="nav-item dropdown" style="position:relative;left:36vw!important;">
-                                                <a class="text-white nav-link dropdown-toggle navbar-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <a class="text-white hover-underline-animation-current current-page nav-link active navbar-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Profile
                                                 </a>
 
                                                 <ul class="dropdown-menu navbar-font" aria-labelledby="navbarDropdown" style="background-color:#57393c!important;text-align:right">
                                                 <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="login.html" id="login_drop">Log in</a></li>
-                                                <li><a class="text-white hover-underline-animation-current current-page dropdown-item" style="float:right" aria-current="paige" id="register_drop">Sign up</a></li>
+                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="register.html" id="register_drop">Sign up</a></li>
                                                 </ul>
                                         </li>
                                         </ul>
@@ -45,16 +47,20 @@
                 </nav>
 	</div>
 
-	<div class="center-block">
-            <div class="form_text" id="login_box" style="justify-content:center;">
+			<script src = "../static/js/map.js"></script>
+	<div style="background-color:#556989; width:40vw; height:93.65vh; margin: -0.5vh 0vw;">
+		<div> <img src="../images/avatar.jpg" style="margin: 5vh 13.5vw; border-radius:50%; height:17.5vh; width:9vw;"> </div>
+	</div>
 
-		<div> <img src="../images/avatar.jpg" style="border-radius:50%; height:13.5vh; width:7vw;"> </div>
-		<input type="text" placeholder="Username" name="uname" required="" id="usernm"><br>
-		<input type="password" placeholder="Password" name="pswrd" required="" id="pass"><br>
-		<input type="password" placeholder="Confirm Password" name="pswrd" required="" id="pass"><br>
+	<div style="background-color:#171f32; width:60vw; height:93.65vh; margin: -93.65vh 40vw;"> 
+		<div style="background-color:red;width:30vw;margin-left:15vw;"> 
+			<div class="text-white"> <h3 style="text-align:center;"> Device: 123 </h3> </div>
+			<div style="display:inline-block;"> </div>
 
-            <button style="margin-top:4vh;" class="submit submit-underline " onclick="login(document.getElementById('login_box'))">Register</button><br>
-        </div>
+			<div id="map" style="width: 30vw; height: 10vh;">
+			</div>
+		</div>
+	</div>
 
 	<script src="../js/requests.js"></script>
         <script src="../js/profile_details.js"></script>
