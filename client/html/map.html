@@ -10,53 +10,74 @@
 
         <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
-        <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.bundle.js') }}"></script>
 
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/map.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/map.css') }}">
     </head>
 
     <body >
-        <nav class="navbar navbar-unit navbar-expand-lg navbar-light">
-            <a class="navbar-brand navbar-font" href="https://github.com/generot/hacktues9-memelitrix"> HARD </a>
-
-            <ul class="navbar-nav" >
-                <div class="navbar-nav navbar-unit">
-                    <li class="nav-item" >
-                        <a class="navbar-element nav-link navbar-font" href="/"> Home </a>
-                    </li>
-
-                <li class="nav-item">
-                    <a class="navbar-element nav-link navbar-font" href="/about_us"> About us </a>
+        <nav class="navigation-bar">
+            <ul class="navigation-route-list">
+                <li class="navigation-route-item">
+                    <a href="https://github.com/generot/hacktues9-memelitrix">
+                        <img src="{{ url_for('static', filename='/images/github.png') }}" alt="github icon">
+                        <p>GitHub</p>
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="navbar-current navbar-element nav-link navbar-font"> Map </a>
+
+                <li class="navigation-route-item">
+                    <a href="/">
+                        <img src="{{ url_for('static', filename='/images/home.png') }}" alt="home icon">
+                        <p>Home</p>
+                    </a>
                 </li>
-                </div>
+
+                <li class="navigation-route-item">
+                    <a href="/about_us">
+                        <img src="{{ url_for('static', filename='/images/about_us.png') }}" alt="about us icon" />
+                        <p>About us</p>
+                    </a>
+                </li>
+
+                <li class="navigation-route-item" id="nav-auth">
+                    <a href="/auth">
+                        <img src="{{ url_for('static', filename='/images/auth.png') }}" alt="auth icon" />
+                        <p>Authenticate</p>
+                    </a>
+                </li>
+
+                <li class="navigation-route-item active" id="nav-map">
+                    <a>
+                        <img src="{{ url_for('static', filename='/images/map.png') }}" alt="map icon" />
+                        <p>Map</p>
+                    </a>
+                </li>
+
+                <li class="navigation-route-item" id="nav-sign-out" style="display:none;">
+                    <a>
+                        <img src="{{ url_for('static', filename='/images/sign_out.png') }}" alt="auth icon" />
+                        <p>Sign out</p>
+                    </a>
+                </li>
+
             </ul>
-
-            <div class="navbar-unit nav-item">
-                <a class="nav-link dropdown-toggle navbar-font" id="navbarDropdown"  data-bs-toggle="dropdown"> Profile </a>
-
-                <ul class="dropdown-menu navbar-font" >
-                    <li><a class="navbar-element dropdown-item" href="/login" id="login_drop">Log in</a></li>
-                    <li><a class="navbar-element dropdown-item" href="/register" id="register_drop">Sign up</a></li>
-                    <li><a class="navbar-element dropdown-item" style="display:none" id="sign_drop">Sign out</a></li>
-                </ul>
-            </div>
         </nav>
 
-        <script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
         <div class="map" id="map"></div>
 
-        <div class="taskline" id="device_container"> 
-            <div style="padding-top:4vh; padding-bottom:2vh;">
-                <input type="text" placeholder="Username" name="uname" id="username">
-                <img class="icon" src="{{ url_for('static', filename='/images/filter_icon.png') }}">
-                <img class="icon" src="{{ url_for('static', filename='/images/globe_icon.png') }}">
+        <button class="menu-trigger button">
+            <img src="{{ url_for('static', filename='/images/gear.png') }}" alt="menu icon" />
+        </button>
+
+        <div class="drawer hidden">
+            <div class="drawer-actions">
+                <button class="drawer-close-action">
+                    <img src="{{ url_for('static', filename='/images/close.png') }}" alt="close icon" />
+                </button>
             </div>
+            <p class="device-list-label">Devices</p>
+            <ul class="device-list"></ul>
         </div>
 
         <script src="{{ url_for('static', filename='/js/requests.js') }}"></script>

@@ -1,5 +1,5 @@
 const HAS_API_KEY = !!localStorage.getItem('API_KEY')
-if (HAS_API_KEY) window.location.href = '/html/map'
+if (HAS_API_KEY) window.location.href = '/map'
 const API_KEY = encodeURIComponent(localStorage.getItem('API_KEY'))
 
 const SIGN_IN = 'SIGN_IN'
@@ -54,29 +54,37 @@ form.addEventListener('submit', async (e) => {
         return
     }
 
-    var resp = await getFromRoute(queryStringParams("/register", [["username", username.value], ["password", password.value]]), "POST");
+    const route = MODE === SIGN_UP ? "/register" : "/login";
+    const resp = await getFromRoute(queryStringParams(route, [["username", username.value], ["password", password.value]]), "POST");
 
-	if(resp.code == 200){
-		localStorage.setItem("API_KEY", resp.API_key);
-    	localStorage.setItem("USER_ID", resp.id);
-		if (Notification.permission === "default") {
-			Notification.requestPermission().then(perm => {
-				if (Notification.permission === "granted") {
-					regWorker().catch(err => console.error(err));
-				} else {
-					alert("Please allow notifications.");
-				}
-			});
-	  	} else if (Notification.permission === "granted") {
-			regWorker().catch(err => console.error(err));
-	  	} else { 
-			alert("Please allow notifications."); 
-		}	
-	}else{
-		alert("User with this username already exists");
-		clear_form();
-	}
+    if (resp.code !== 200 ) {
+        alert("Authentication failed.");
+        username.value = "";
+        clearPassword();
+        return;
+    }
 
-    // Fetch and parce response
-    //window.location.href = '/html/map'
+
+    localStorage.setItem("API_KEY", resp.API_key);
+    localStorage.setItem("USER_ID", resp.id);
+
+    if (Notification.permission === "granted") {
+        handleGrantedPermission();
+        return;
+    }
+
+    const permission = await Notification.requestPermission();
+
+    if (permission === "granted") {
+        handleGrantedPermission();
+        return;
+    }
+    alert("Please allow notifications."); 
+
+    window.location.href = '/map';
 })
+
+function handleGrantedPermission() {
+    regWorker().catch(err => console.error(err));
+    window.location.href = '/map';
+}

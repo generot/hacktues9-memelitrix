@@ -35,8 +35,4 @@ form.addEventListener("submit", async function(event){
 		clear_form();
 		return;
 	}	
-	
-	
-	
-
 })

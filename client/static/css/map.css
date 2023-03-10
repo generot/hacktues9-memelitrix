@@ -3,21 +3,9 @@ body {
 }
 
 .map {
-    width: 80vw; 
-    height: 94vh;
-}
-
-.taskline {
- text-align: center; 
- width: 20vw; 
- height: 94vh; 
- margin: -94vh 80vw;
-}
-
-.icon {
-    display: inline; 
-    width: 1.5vw; 
-    height: 3vh;
+    top: 0;
+    width: 100vw; 
+    height: 92.5vh;
 }
 
 .intrusion_marker {
@@ -59,8 +47,6 @@ body {
     border-width: 0.25em; 
     max-height:30.5vh;
 }
-
-
 
 .device_card > h3{
     text-align:center;

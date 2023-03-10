@@ -1,5 +1,5 @@
 body {
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .cards {
@@ -19,7 +19,7 @@ body {
 }
 
 
-img {
+.card-img {
 	filter: grayscale(100%);
 	height: 100%;
 	width: 100%;
@@ -30,7 +30,7 @@ img {
 	visibility: hidden;
 }
 
-.card:hover, img:hover , img:hover + .desc{
+.card:hover, .card-img:hover , .card-img:hover + .desc{
 	height: 50vh;
 	width: 17.5vw;
 	visibility:visible;
