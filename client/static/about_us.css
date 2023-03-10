@@ -1,7 +1,18 @@
+body {
+    overflow:hidden;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    padding-left:3.75vw;
+    padding-right:3.75vw;
+}
+
 .card {
 	height: 45vh;
 	width: 15vw;
-	margin: 15vh 1.85vw;
+	margin-top: 15vh;
 	display:inline-block;
 	position:relative;
 	transition: width 0.75s, height 0.75s;
