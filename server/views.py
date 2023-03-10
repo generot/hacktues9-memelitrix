@@ -79,7 +79,7 @@ def login():
     return a
 
 @views.route("/_login", methods=["POST"])
-def login():
+def _login():
     data = request.args.to_dict()
     username = data["username"]
     password = data["password"]
