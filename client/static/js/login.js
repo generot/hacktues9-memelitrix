@@ -32,7 +32,7 @@ form.addEventListener("submit", async function(event){
 
 	var resp = await getFromRoute(queryStringParams("/login", [["username", username], ["password", password]]), "POST");
     
-	if(resp.code == 200){
+	if(resp == "200"){
 		localStorage.setItem("API_KEY", resp.API_key);
 		localStorage.setItem("USER_ID", resp.id);
     		window.location.href = "/map";

@@ -58,7 +58,7 @@ def login():
     password = data["password"]
 
     a = db.check_user(username, password)
-    return a
+    return f"{a['code']}"
 
 
 @views.route("/verify", methods=["GET"])
