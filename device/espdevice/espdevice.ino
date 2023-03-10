@@ -1,3 +1,4 @@
+#include <SPI.h>
 #include <SD.h>
 
 #include <WiFi.h>
@@ -9,6 +10,13 @@
 #define BUFFER_MAX 64
 #define ID_MAX 32
 
+#define F_WORLD_POS "/w"
+#define F_NETWORK "/n"
+#define F_USER "/u"
+#define F_OWNER "/o"
+#define F_DEV_ID "/d"
+#define F_API_KEY "/a"
+
 enum bl_resp_type {
   BL_WIFI_CRED = 'W',
   BL_USER_CRED = 'U',
@@ -16,12 +24,16 @@ enum bl_resp_type {
   BL_INVALID = 0
 };
 
+const int SD_SS = 5;
+
 char buffer[BUFFER_MAX] = {0};
 
 char field1[ID_MAX] = {0};
 char field2[ID_MAX] = {0};
 
 int buf_len = 0;
+
+//========================BLUETOOTH HANDLING========================
 
 bl_resp_type bl_get_type(void) {
   if(buffer[0] != 'W' && buffer[0] != 'U' && buffer[0] != 'L') {
@@ -83,9 +95,74 @@ bool bl_get_response(void) {
   return true;
 }
 
+//========================BLUETOOTH HANDLING========================
+
+//========================SD HANDLING========================
+
+int path_i = 0;
+
+bool sd_initialize_file(const char *ptr) {
+  if(SD.exists(ptr)) {
+    return false;
+  }
+
+  Serial.print(F("Creating: "));
+  Serial.println(ptr);
+
+  File f = SD.open(ptr, FILE_WRITE);
+  f.close();
+
+  return true;
+}
+
+// bool sd_initialize_files(void) {
+//   Serial.println("Initializing files...");
+
+//   f = SD.open("/paths.txt");
+
+//   while(f.available()) {
+//     char ch = f.read();
+
+//     if(ch != ';') {
+//       field1[path_i++] = ch;
+//     } else {
+//       path_i = 0;
+
+//       Serial.println(field1);
+//       f2 = SD.open(field1, FILE_WRITE);
+//       f2.close();
+
+//       for(int i = 0; i < ID_MAX; i++) {
+//         field1[i] = 0;
+//       }
+//     }
+//   }
+
+//   return false;
+// }
+
+//========================SD HANDLING========================
+
 void setup() {
   Serial.begin(BAUD_RATE);
   BL_SERIAL.begin(BAUD_RATE);
+
+  delay(500);
+  while(!Serial) { ; }
+
+  if(!SD.begin(SD_SS)) {
+    Serial.println("SD: Initialization failed.");
+    return;
+  }
+
+  Serial.println("SD: Connected successfully.");
+
+  sd_initialize_file(F_WORLD_POS);
+  sd_initialize_file(F_NETWORK);
+  sd_initialize_file(F_USER);
+  sd_initialize_file(F_OWNER);
+  sd_initialize_file(F_DEV_ID);
+  sd_initialize_file(F_API_KEY);
 }
 
 void loop() {
@@ -126,10 +203,6 @@ void loop() {
           break;
         }
       }
-    }
-
-    if(Serial.available()) {
-      BL_SERIAL.write(Serial.read());
     }
   }
 }
