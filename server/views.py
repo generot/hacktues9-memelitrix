@@ -20,6 +20,7 @@ def map_page():
 def about_us_page():
     return render_template("about_us.html")
 
+
 @views.route("/login")
 def login_page():
     return render_template("login.html")
@@ -114,15 +115,20 @@ def get_break_in():
 
     return json.dumps(db.get_break_ins(device_id, API_key))
 
+
 @views.route("/getBreakInsFilter", methods=["GET"])
 @cross_origin()
 def get_break_in_filter():
     data = request.args.to_dict()
-    device_id = data["id"]
-    API_key = data["API_key"]
-    rad = data["radius"]
 
-    return json.dumps(db.get_break_ins_filter(device_id, API_key, rad))
+    API_key = data["API_key"]
+    top = data["top"]
+    bottom = data["bottom"]
+    right = data["right"]
+    left = data["left"]
+
+    return json.dumps(db.get_break_ins_filter(API_key, float(top), float(bottom), float(left), float(right)))
+
 
 @views.route("/getDevices", methods=["GET"])
 @cross_origin()
@@ -131,3 +137,8 @@ def get_devices_for_user():
     API_key = data["API_key"]
 
     return db.get_devices_for_user(API_key)
+
+
+@views.route("/getPublic", methods=["GET"])
+def get_public():
+    return db.get_public_key()

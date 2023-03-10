@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from views import views
 from flask_cors import CORS
+from pywebpush import webpush, WebPushException
 
 temp_dir = os.path.abspath("../client/html")
 stat_dir = os.path.abspath("../client/static")

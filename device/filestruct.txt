@@ -1,0 +1,6 @@
+/w -> /world_position.txt;
+/n -> /cred_network.txt;
+/u -> /cred_user.txt;
+/o -> /cred_server_owner_id.txt;
+/d -> /cred_server_device_id.txt;
+/a -> /cred_server_api_key.txt;
