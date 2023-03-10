@@ -101,7 +101,7 @@ async function main(){
     console.log(response);
     var device_container = document.getElementById("device_container");
     response.device_ids.forEach(device_id => {
-        device_container.appendChild(create_device_card(device_id));
+        device_container.appendChild(create_device_card(device_id, response.device_ids));
     })
     
     initMap(response.device_ids[0]);
@@ -113,13 +113,19 @@ async function main(){
 
 </div> */
 
-function create_device_card(device_id){
+function create_device_card(device_id, device_ids){
     const card = document.createElement("div");
     var device_info = document.createElement("h3");
+	console.log("device_id = ", device_id);
     card.className = "device_card";
+	card.setAttribute('id', `device_${device_id}`);
     device_info.innerText = "device : " + device_id;
     card.appendChild(device_info);
     card.addEventListener("click", function(){
+	    for(var card of device_ids) {
+		    document.getElementById(`device_${card}`).className="device_card";
+		}
+		document.getElementById(`device_${device_id}`).className="device_card_selected";
         initMap(device_id);
     })
     return card;
