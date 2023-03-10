@@ -103,6 +103,7 @@ async function main(){
     response.device_ids.forEach(device_id => {
         device_container.appendChild(create_device_card(device_id));
     })
+    
     initMap(response.device_ids[0]);
 }
 
