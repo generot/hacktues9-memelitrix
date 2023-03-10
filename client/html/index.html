@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <title>HARD</title>
+
+        <title>HARD</title>
+	<link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
 
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
@@ -42,6 +44,27 @@
                                 </div>
                         </div>
                 </nav>
+	</div>
+
+	<div style="display:inline-block; margin:5vh 3vw; max-width:45vw;">
+		<h1 style="font-size:69px;"> HomeguARD </h1> <br>
+		<h3 style="font-style: italic"> HomeguARD е иновативна система за сигурност, разработена от отбора Memelitrix за HackTUES 9. <br><br>
+		 Системата използва съвкупност от сензори, засичащи
+			всяко потенциално неоторизирано влизане във Вашата собственост. Отчетените нарушения биват изпратени към сървър, запазвайки информация за
+			съответната нередност и сигнализирайки околните HARD системи за налична опасност. <br><br>
+			<b> Използваните технологии включват:</b><br> 
+		</h3>
+
+		<ul> 
+			<li> <h4> Физическо засичане на влизане с взлом - лазерна система и инфрачервен сензор, свързани към ESP32 микроконтролер. </h4></li>	
+			<li> <h4> Сървър - Python Flask и MongoDB. </h4></li>	
+			<li> <h4> Функционалности и връзка с уебсайта - JavaScript и TomTom API. </h4></li>	
+			<li> <h4> Разработка на мобилното приложение - MIT App Inventor. </h4></li>	
+			<li> <h4> Визията на сайта - HTML, CSS, JavaScript и Botstrap. </h4></li>	
+		</ul>
+	</div>
+
+	<div style="display:inline-block; margin-left: 50vw;">
 	</div>
 
 	<script src="{{ url_for('static', filename='/js/requests/js') }}"></script>

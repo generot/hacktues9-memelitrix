@@ -1,14 +1,20 @@
-<html>
-
+<!DOCTYPE html>
+<html lang = "en">
 <head>
-        <link rel="stylesheet" type="text/css"
-                href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='/css/map.css') }}">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+         <title>HARD</title>
+	<link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
+
+        <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
+        <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.bundle.js') }}"></script>
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
-        <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.bundle.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='/css/map.css') }}">
 </head>
 
 <body style="overflow:hidden">
@@ -61,8 +67,18 @@
                 </div>
 
 		<script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
-                <div id="map" style="width: 80vw; height: 94vh;"></div>
-                <div id="device_container" style="background-color:#556989; width:20vw; height:94vh; margin: -94vh 80vw;"> </div>
+                <div id="map" style="margin-top:-0.60vh; width:80vw; height:94vh;"></div>
+                <div id="device_container" style="text-align:center; background-color:; width:20vw; height:94vh; margin: -94vh 80vw;"> 
+
+			<div style="padding-top:4vh; padding-bottom:2vh;">
+				<input type="text" placeholder="Username" name="uname" id="username">
+				<img style="display:inline; width:1.5vw; height:3vh;" src="{{ url_for('static', filename='/images/filter_icon.png') }}">
+				<img style="display:inline; width:1.5vw; height:3vh;" src="{{ url_for('static', filename='/images/globe_icon.png') }}">
+			</div>
+		</div>
+
+
+
 		<script src="{{ url_for('static', filename='/js/requests.js') }}"></script>
 		<script src="{{ url_for('static', filename='/js/map.js') }}"></script>
 </body>
