@@ -297,6 +297,8 @@ def add_sub_key(API_key, sub):
 
     users.update_one(user_schema, values)
 
+    return {"code": 200, "message": "Added sub key"}
+
 
 def push_notification(sub):
     result = "OK"

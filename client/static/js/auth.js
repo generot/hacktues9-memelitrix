@@ -35,7 +35,6 @@ const clearPassword = () => {
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault()
-    console.log(username.value, password.value)
     if (username.value.length < 4 || username.value.length > 20) {
         alert('Username must be between 4 and 20 characters!')
         username.value = ''
@@ -48,7 +47,6 @@ form.addEventListener('submit', async (e) => {
         clearPassword()
         return
     }
-    console.log(username.value, password.value)
 
     if (MODE === SIGN_UP && password.value !== confirmPassword.value) {
         alert('Password field and Confirm password field must match!')
@@ -78,7 +76,6 @@ form.addEventListener('submit', async (e) => {
 		alert("User with this username already exists");
 		clear_form();
 	}
-    console.log(username.value, password.value)
 
     // Fetch and parce response
     //window.location.href = '/html/map'
