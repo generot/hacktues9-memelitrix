@@ -102,7 +102,8 @@ def dist(lat1, lon1, lat2, lon2):
     lon1 = float(lon1)
     lat2 = float(lat2)
     lon2 = float(lon2)
-    return acos( sin(lat1)*sin(lat2) + cos(lat1)*cos(lat2)*cos(lon2-lon1) )*6371
+    return acos(sin(lat1)*sin(lat2) + cos(lat1)*cos(lat2)*cos(lon2-lon1))*6371
+
 
 def check_owner(owner_id):
     for i in users.find({}):
@@ -160,15 +161,17 @@ def get_user_by_API_key(API_key):
     for i in users.find({}):
         if i["API_key"] == API_key:
             return i
-        
+
     return None
+
 
 def get_device_by_ID(id):
     for i in devices.find({}):
         if i["id"] == id:
             return i
-        
+
     return None
+
 
 def add_owner(device_id, owner_id):
     if check_device_api_key(get_device_API_key_by_ID(device_id)) == 0:
@@ -201,7 +204,7 @@ def add_owner(device_id, owner_id):
 def add_break_in(device_id, API_key):
     if check_device_api_key(API_key) == 0:
         return {"code": 403, "message": "Permission denied"}
-    
+
     if get_device_by_ID(device_id)["API_key"] != API_key:
         return {"code": 403, "message": "Permission denied!"}
 
@@ -219,7 +222,7 @@ def add_break_in(device_id, API_key):
 def get_break_ins(device_id, user_API_key):
     if check_device(device_id, False) == 0:
         return {"code": 404, "message": "Device not found"}
-    
+
     if check_user_api_key(user_API_key) == 0:
         return {"code": 404, "message": "User not found"}
 
@@ -230,51 +233,47 @@ def get_break_ins(device_id, user_API_key):
 
     device = get_device_by_ID(device_id)
     breaks.append(
-                {"device_id": device_id,
-                "lat": device["lat"], "lon": device["lon"]}
-            )
+        {"device_id": device_id,
+         "lat": device["lat"], "lon": device["lon"]}
+    )
 
     for i in break_ins.find({}):
         if i["device_id"] != device_id:
             breaks.append(
                 {"device_id": i["device_id"],
-                "lat": i["lat"], "lon": i["lon"]}
+                 "lat": i["lat"], "lon": i["lon"]}
             )
 
     return {"code": 200, "break_ins": breaks}
 
-def get_break_ins_filter(device_id, user_API_key, radius):
-    if check_device(device_id, False) == 0:
-        return {"code": 404, "message": "Device not found"}
-    
+
+def check_point(lat, lon, top, bottom, left, right):
+    if lat >= bottom and lat <= top and lon >= left and lon <= right:
+        return 1
+
+    return 0
+
+
+def get_break_ins_filter(user_API_key, top, bottom, left, right):
     if check_user_api_key(user_API_key) == 0:
         return {"code": 404, "message": "User not found"}
 
-    if ObjectId(get_device_by_ID(device_id)["owner_id"]) != get_user_by_API_key(user_API_key)["_id"]:
-        return {"code": 403, "message": "Permission denied"}
-
     breaks = []
 
-    device = get_device_by_ID(device_id)
-    breaks.append(
-                {"device_id": device_id,
-                "lat": device["lat"], "lon": device["lon"]}
+    for i in break_ins.find({}):
+        if check_point(float(i["lat"]), float(i["lon"]), top, bottom, left, right) == 1:
+            breaks.append(
+                {"device_id": i["device_id"],
+                 "lat": i["lat"], "lon": i["lon"]}
             )
 
-    for i in break_ins.find({}):
-        if i["device_id"] != device_id:
-            if dist(device["lat"], device["lon"], i["lat"], i["lon"]) <= float(radius):
-                breaks.append(
-                    {"device_id": i["device_id"],
-                    "lat": i["lat"], "lon": i["lon"]}
-                )
-
     return {"code": 200, "break_ins": breaks}
+
 
 def get_devices_for_user(API_key):
     if check_user_api_key(API_key) == 0:
         return {"code": 404, "message": "User not found"}
-    
+
     user = get_user_by_API_key(API_key)
 
-    return {"code": 200, "message": "Successfully GOT the owned devices for user", "device_ids": user["device_ids"] }
+    return {"code": 200, "message": "Successfully GOT the owned devices for user", "device_ids": user["device_ids"]}
