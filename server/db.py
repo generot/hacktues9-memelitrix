@@ -206,21 +206,25 @@ def add_owner(device_id, owner_id):
 
 
 def add_break_in(device_id, API_key):
+    if check_device(device_id, False) == 0:
+        return {"code": 404, "message": "Device not found"}
+    
     if check_device_api_key(API_key) == 0:
         return {"code": 403, "message": "Permission denied"}
 
-    if get_device_by_ID(device_id)["API_key"] != API_key:
-        return {"code": 403, "message": "Permission denied!"}
+    device = get_device_by_ID(device_id)
+    if device["API_key"] != API_key:
+        return {"code": 403, "message": "Permission denied"}
 
+    break_ins.insert_one({"device_id": device["id"], "owner_id": device["owner_id"],"lat": device["lat"], "lon": device["lon"]})
+    
     for i in devices.find({}):
-        if i["id"] == device_id:
-            break_ins.insert_one(
-                {"device_id": i["id"], "owner_id": i["owner_id"],
-                    "lat": i["lat"], "lon": i["lon"]}
-            )
-            return {"code": 200, "message": "Break in added successfully"}
-
-    return {"code": 404, "message": "Could not find device"}
+        if dist(i["lat"], i["lon"], device["lat"], device["lon"]) < 0.1:
+            owner_shema = {"_id": ObjectId(device["owner_id"])}
+            owner = users.find_one(owner_shema)
+            if owner != None:
+                push_notification(owner["sub"])
+    return {"code": 200, "message": "Break in added successfully"}
 
 
 def get_break_ins(device_id, user_API_key):
@@ -292,3 +296,22 @@ def add_sub_key(API_key, sub):
     values = {"$set": {"sub": sub}}
 
     users.update_one(user_schema, values)
+
+
+def push_notification(sub):
+    result = "OK"
+    try:
+        webpush(
+            subscription_info=sub,
+            data=json.dumps({
+                "title": "Welcome!",
+                "body": "Yes, it works!",
+                "icon": "static/images/logo.png"
+            }),
+            vapid_private_key=PRIVATE,
+            vapid_claims={"sub": SUBJECT}
+        )
+    except WebPushException as ex:
+        print(ex)
+        result = "FAILED"
+    return result
