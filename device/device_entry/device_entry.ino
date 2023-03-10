@@ -1,19 +1,25 @@
-#include <WiFiEsp.h>
-
 #define BUFFER_MAX 64
 #define CREDENTIALS_MAX 32
 
 #define BAUD_RATE 9600
 
-#define BL_SERIAL Serial1
-#define WIFI_SERIAL Serial2
+#define WIFI_RX 6
+#define WIFI_TX 5
 
+#define BL_SERIAL Serial
 #define BL_ENABLE_PIN 22
 
-char bl_res_buffer[BUFFER_MAX];
+char wss[] = "InnovationForumGuests";
+char wpass[] = "";
 
-char bl_ssid[CREDENTIALS_MAX];
-char bl_pass[CREDENTIALS_MAX];
+int wifi_status = 0;
+
+//===================BLUETOOTH INTERFACING===================
+
+char bl_res_buffer[BUFFER_MAX] = {0};
+
+char bl_ssid[CREDENTIALS_MAX] = {0};
+char bl_pass[CREDENTIALS_MAX] = {0};
 
 int bl_cred_ix = 0;
 bool bl_user_connected = false;
@@ -64,46 +70,13 @@ bool bl_get_response(void) {
   return true;
 }
 
+//===================BLUETOOTH INTERFACING===================
+
 void setup() {
-  Serial.begin(BAUD_RATE);
-  
-  BL_SERIAL.begin(BAUD_RATE);
-  BL_SERIAL.setTimeout(500);
-
-  pinMode(BL_ENABLE_PIN, OUTPUT);
-
-  digitalWrite(BL_ENABLE_PIN, LOW);
+  Serial.begin(115200);
 }
 
 void loop() {
-  if(bl_get_response()) {
-    if(bl_has_connected()) {
-      Serial.println("A user has connected.");
-    }
-
-    if(bl_has_disconnected()) {
-      Serial.println("A user has disconnected.");
-    }
-
-    if(bl_check_credentials('W')) {
-      Serial.println("Wifi credentials entered.");
-      bl_parse_credentials();
-
-      Serial.println("SSID: " + String(bl_ssid));
-      Serial.println("PASS: " + String(bl_pass));
-    }
-
-    if(bl_check_credentials('U')) {
-      Serial.println("User credentials entered.");
-      bl_parse_credentials();
-
-      Serial.println("SSID: " + String(bl_ssid));
-      Serial.println("PASS: " + String(bl_pass));
-    }
-  }
-  
-  if(Serial.available()) {
-    //BL_SERIAL.write((char)Serial.read());
-    BL_SERIAL.write(Serial.read());
-  }
+  Serial.println("Hello, world");
+  delay(1000);
 }
