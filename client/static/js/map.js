@@ -1,3 +1,4 @@
+const API_KEY = encodeURIComponent(localStorage.getItem("API_KEY"));
 
 var popupOffsets = {
     top: [0, 0],
@@ -28,7 +29,7 @@ function InitMarker(longitude, latitude, class_name) {
 }
 
 async function getPoints(device_id) {
-    let query = queryStringParams("http://127.0.0.1:5000/getBreakIns", [["id", device_id]]);
+    let query = queryStringParams("http://127.0.0.1:5000/getBreakIns", [["id", device_id],["API_key", API_KEY]]);
     let resp = await getFromRoute(query);
 
     const { break_ins } = resp;
@@ -72,6 +73,8 @@ async function initMap(device_id) {
         center: new tt.LngLat(Markers[0].getLngLat().lng, Markers[0].getLngLat().lat)
     })
 
+    console.log(Markers[0].getLngLat());
+
     map.addControl(new tt.NavigationControl());
     for (let i = 0; i < Markers.length; i++) {
         let marker = Markers[i];
@@ -89,4 +92,38 @@ async function initMap(device_id) {
 
 }
 
-initMap(2);
+if(!API_KEY){
+    window.location.href = "/login";
+}
+
+async function main(){
+    const response = await getFromRoute(queryStringParams("http://127.0.0.1:5000/getDevices", [["API_key", API_KEY]]));
+    console.log(response);
+    var device_container = document.getElementById("device_container");
+    response.device_ids.forEach(device_id => {
+        device_container.appendChild(create_device_card(device_id));
+    })
+    
+    initMap(response.device_ids[0]);
+}
+
+/* <div style="display:inline-block; background-color:#171f32; width:13vw; margin: 5vh 3.5vw; border-radius:15px; border-style: solid; border-color: white; border-width: 0.25em; max-height:30.5vh;">
+
+<h3 class="text-white" style="text-align:center;"> Device: 123 </h3>
+
+</div> */
+
+function create_device_card(device_id){
+    const card = document.createElement("div");
+    var device_info = document.createElement("h3");
+    card.className = "device_card";
+    device_info.innerText = "device : " + device_id;
+    card.appendChild(device_info);
+    card.addEventListener("click", function(){
+        initMap(device_id);
+    })
+    return card;
+}
+
+main()
+

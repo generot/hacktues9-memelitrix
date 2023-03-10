@@ -114,6 +114,16 @@ def get_break_in():
 
     return json.dumps(db.get_break_ins(device_id, API_key))
 
+@views.route("/getBreakInsFilter", methods=["GET"])
+@cross_origin()
+def get_break_in_filter():
+    data = request.args.to_dict()
+    device_id = data["id"]
+    API_key = data["API_key"]
+    rad = data["radius"]
+
+    return json.dumps(db.get_break_ins_filter(device_id, API_key, rad))
+
 @views.route("/getDevices", methods=["GET"])
 @cross_origin()
 def get_devices_for_user():
