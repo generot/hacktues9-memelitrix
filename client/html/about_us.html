@@ -36,6 +36,7 @@
                                                 <ul class="dropdown-menu navbar-font" aria-labelledby="navbarDropdown" style="background-color:#57393c!important;text-align:right">
                                                 <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="/login" id="login_drop">Log in</a></li>
                                                 <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="/register" id="register_drop">Sign up</a></li>
+                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right;display:none" href="" id="sign_drop">Sign out</a></li>
                                                 </ul>
                                         </li>
                                         </ul>
@@ -86,5 +87,5 @@
 
 	<script src="{{ url_for('static', filename='/js/requests/js') }}"></script>
 	<script src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
-        <script>editAfterLogin();</script>	
+	<script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
 </body>

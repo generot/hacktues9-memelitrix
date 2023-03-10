@@ -51,6 +51,7 @@
                                                                 <li><a class="text-white hover-underline-animation dropdown-item"
                                                                                 style="float:right" href="/register"
                                                                                 id="register_drop">Sign up</a></li>
+                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right;display:none" href="" id="sign_drop">Sign out</a></li>
                                                         </ul>
                                                 </li>
                                         </ul>
@@ -59,11 +60,11 @@
                 </nav>
                 </div>
 
+		<script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
                 <div id="map" style="width: 80vw; height: 94vh;"></div>
                 <div id="device_container" style="background-color:#556989; width:20vw; height:94vh; margin: -94vh 80vw;"> </div>
 		<script src="{{ url_for('static', filename='/js/requests.js') }}"></script>
 		<script src="{{ url_for('static', filename='/js/map.js') }}"></script>
-
 </body>
 
 </html>

@@ -1,5 +1,3 @@
-
-
 const form = document.getElementById('register_form');
 const username_field = document.getElementById('username');
 const password_field = document.getElementById('password');
