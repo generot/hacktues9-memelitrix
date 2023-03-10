@@ -59,10 +59,25 @@ def check_user(username, password):
             if i["password"] == password_hash:
                 return {"code": 200, "message": "User logged in successfully", "username": i["name"], "id": str(i["_id"]), "API_key": str(i["API_key"])}
             else:
-                return {"code": 400, "message": "Username or password is incorrect"}
+                return {"code": 400, "message": "Username or password is incorrect", "API_key": "null"}
 
-    return {"code": 400, "message": "Username or password is incorrect"}
+    return {"code": 400, "message": "Username or password is incorrect", "API_key": "null"}
 
+
+def _check_user(username, password):
+    for i in users.find({}):
+        if i["name"] == username:
+            password = password.encode()
+            salt = 32*b'\x00'
+            password_hash = hashlib.pbkdf2_hmac(
+                'sha256', password, salt, 100000)
+
+            if i["password"] == password_hash:
+                return str(i["API_key"])
+            else:
+                return "null"
+
+    return "null"
 
 def fetch_users():
     cursor = users.find({})
@@ -89,7 +104,7 @@ def verify_user_db(username):
 def add_device(id, owner_id, lat, lon):
     for i in devices.find({}):
         if i["id"] == id:
-            return {"code": 400, "message": "Device already registered"}
+            return "400"
 
     API_key = generate_random_string()
 
@@ -98,7 +113,7 @@ def add_device(id, owner_id, lat, lon):
             'lon': lon, 'API_key': str(API_key)}
     )
 
-    return {"code": 200, "message": "Device registered successfully", "API_key": str(API_key)}
+    return "200"
 
 
 def dist(lat1, lon1, lat2, lon2):
@@ -179,13 +194,13 @@ def get_device_by_ID(id):
 
 def add_owner(device_id, owner_id):
     if check_device_api_key(get_device_API_key_by_ID(device_id)) == 0:
-        return {"code": 403, "message": "Permission denied"}
+        return "403"
 
     if check_owner(owner_id) == 0:
-        return {"code": 404, "message": "User not found"}
+        return "404"
 
     if check_device(device_id) == 0:
-        return {"code": 404, "message": "Device not found or already has an owner"}
+        return "404"
 
     device_schema = {"id": device_id}
     owner_schema = {"_id": ObjectId(owner_id)}
@@ -202,19 +217,19 @@ def add_owner(device_id, owner_id):
     users.update_one(owner_schema, {"$set": {"device_ids": new_array}})
     devices.update_one(device_schema, values)
 
-    return {"code": 200, "message": "Owner added successfully"}
+    return "200"
 
 
 def add_break_in(device_id, API_key):
     if check_device(device_id, False) == 0:
-        return {"code": 404, "message": "Device not found"}
+        return "404"
     
     if check_device_api_key(API_key) == 0:
-        return {"code": 403, "message": "Permission denied"}
+        return "403"
 
     device = get_device_by_ID(device_id)
     if device["API_key"] != API_key:
-        return {"code": 403, "message": "Permission denied"}
+        return "403"
 
     break_ins.insert_one({"device_id": device["id"], "owner_id": device["owner_id"],"lat": device["lat"], "lon": device["lon"]})
     
@@ -224,7 +239,7 @@ def add_break_in(device_id, API_key):
             owner = users.find_one(owner_shema)
             if owner != None:
                 push_notification(owner["sub"])
-    return {"code": 200, "message": "Break in added successfully"}
+    return "200"
 
 
 def get_break_ins(device_id, user_API_key):
