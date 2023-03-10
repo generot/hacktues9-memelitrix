@@ -137,3 +137,8 @@ def get_devices_for_user():
     API_key = data["API_key"]
 
     return db.get_devices_for_user(API_key)
+
+
+@views.route("/getPublic", methods=["GET"])
+def get_public():
+    return db.get_public_key()

@@ -7,9 +7,12 @@ import json
 import random
 import string
 from math import *
+from pywebpush import webpush, WebPushException
 
 load_dotenv()
 uri = os.environ["MONGODB_URI"]
+PUBLIC = os.environ["VAPID_PUBLIC"]
+PRIVATE = os.environ["VAPID_PRIVATE"]
 
 client = pymongo.MongoClient(uri)
 db = client["data"]
@@ -277,3 +280,31 @@ def get_devices_for_user(API_key):
     user = get_user_by_API_key(API_key)
 
     return {"code": 200, "message": "Successfully GOT the owned devices for user", "device_ids": user["device_ids"]}
+
+
+def get_public_key():
+    return PUBLIC
+
+
+def push():
+    # (B3-1) GET SUBSCRIBER
+    sub = json.loads(request.form["sub"])
+
+    # (B3-2) TEST PUSH NOTIFICATION
+    result = "OK"
+    try:
+        webpush(
+            subscription_info=sub,
+            data=json.dumps({
+                "title": "Welcome!",
+                "body": "Yes, it works!",
+                "icon": "static/i-ico.webp",
+                "image": "static/i-banner.webp"
+            }),
+            vapid_private_key=VAPID_PRIVATE,
+            vapid_claims={"sub": VAPID_SUBJECT}
+        )
+    except WebPushException as ex:
+        print(ex)
+        result = "FAILED"
+    return result
