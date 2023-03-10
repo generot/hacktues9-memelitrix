@@ -8,8 +8,12 @@
         <title>HARD</title>
         <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
 
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/index.css') }}">
+        <script defer src="{{ url_for('static', filename='/js/requests/js') }}"></script>
+        <script defer src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
+        <script defer src="{{ url_for('static', filename='/js/signout.js') }}"></script>
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/index.css') }}">
     </head>
 
     <body>
@@ -78,7 +82,4 @@
             </ul>
         </div>
 
-        <script src="{{ url_for('static', filename='/js/requests/js') }}"></script>
-        <script src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
-        <script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
     </body>

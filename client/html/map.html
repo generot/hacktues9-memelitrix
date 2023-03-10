@@ -11,8 +11,10 @@
         <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/map.css') }}">
+        <script defer src="{{ url_for('static', filename='/js/requests.js') }}"></script>
+        <script defer src="{{ url_for('static', filename='/js/map.js') }}"></script>
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/map.css') }}">
     </head>
 
@@ -76,12 +78,11 @@
                     <img src="{{ url_for('static', filename='/images/close.png') }}" alt="close icon" />
                 </button>
             </div>
+
             <p class="device-list-label">Devices</p>
             <ul class="device-list"></ul>
         </div>
 
-        <script src="{{ url_for('static', filename='/js/requests.js') }}"></script>
-        <script src="{{ url_for('static', filename='/js/map.js') }}"></script>
     </body>
 
 </html>
