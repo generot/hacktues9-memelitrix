@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="../static/style.css" />
+        <link rel="stylesheet" href="../static/auth.css" />
+    </head>
+    <body>
+        <div class="auth-form-container">
+            <form class="auth-form">
+                <h1 class="header"></h1>
+                <div id="username-field" class="text-field">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" />
+                </div>
+                <div id="password-field" class="text-field">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" />
+                </div>
+                <div id="confirm-password-field" class="text-field">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input id="confirm-password" type="password" />
+                </div>
+                <p class="auth-hint">
+                    Already have an account
+                    <a href="/html/auth?mode=SIGN_IN">Sign in.</a>
+                </p>
+                <button id="auth-submit" type="submit" class="button"></button>
+            </form>
+        </div>
+        <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/requests.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/perm_sw.js') }}"></script>
+    </body>
+</html>

@@ -36,9 +36,7 @@ form.addEventListener("submit", async function(event){
 		return;
 	}	
 	
-	var resp = await getFromRoute(queryStringParams("/register", [["username", username], ["password", password]]), "POST");
-	localStorage.setItem("API_KEY", resp.API_key);
-    localStorage.setItem("USER_ID", resp.id);
-    window.location.href = "/map";
+	
+	
 
 })

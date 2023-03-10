@@ -35,7 +35,7 @@ form.addEventListener("submit", async function(event){
 	if(resp.code == 200){
 		localStorage.setItem("API_KEY", resp.API_key);
 		localStorage.setItem("USER_ID", resp.id);
-    		window.location.href = "/map";
+		window.location.href = "/map";
 	}else{
 		alert("Username and password combination doesn't match a profile");
 		clear_form();
