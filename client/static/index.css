@@ -1,0 +1,13 @@
+.description {
+    display:inline-block; 
+    margin:5vh 3vw; 
+    max-width:45vw;
+}
+
+h1 {
+    font-size:69px;
+}
+
+h4 {
+    font-style: italic;
+}

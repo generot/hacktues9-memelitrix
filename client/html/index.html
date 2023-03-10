@@ -1,73 +1,66 @@
 <!DOCTYPE html>
 <html lang = "en">
-<head>
+    <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>HARD</title>
-	<link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
+        <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
 
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
-	<script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.bundle.js') }}"></script>
-</head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/index.css') }}">
+        <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.bundle.js') }}"></script>
+    </head>
 
-<body>
-        <div class="background-gradient example" >
-		<nav class="navbar navbar-expand-lg navbar-light" style="float:left;position:relative;width:100vw!important;">
-                        <div class="container-fluid">
-                                <a class="text-white hover-underline-animation navbar-brand navbar-font" style="position:absolute;left:4vw"href="https://github.com/generot/hacktues9-memelitrix">HARD</a>
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position:relative;float:left;left:42vw">
-                                        <li class="nav-item" >
-                                                <a class="text-white hover-underline-animation-current current-page nav-link active navbar-font" aria-current="page">Home</a>
-                                        </li>
-                                        <li class="nav-item">
-                                                <a class="text-white hover-underline-animation nav-link navbar-font" href="/about_us">About us</a>
-                                        </li>
-                                        <li class="nav-item">
-                                                <a class="text-white hover-underline-animation  nav-link navbar-font" href="/map">Map</a>
-                                        </li>
-                                        <li class="nav-item dropdown" style="position:relative;left:36vw!important;">
-                                                <a class="text-white nav-link dropdown-toggle navbar-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Profile
-                                                </a>
+    <body>
+        <nav class="navbar navbar-unit navbar-expand-lg navbar-light">
+            <a class="navbar-brand navbar-font" href="https://github.com/generot/hacktues9-memelitrix"> HARD </a>
 
-                                                <ul class="dropdown-menu navbar-font" aria-labelledby="navbarDropdown" style="background-color:#57393c!important;text-align:right">
-                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="/login" id="login_drop">Log in</a></li>
-                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="/register" id="register_drop">Sign up</a></li>
-                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right;display:none" href="" id="sign_drop">Sign out</a></li>
-                                                </ul>
-                                        </li>
-                                        </ul>
-                                </div>
-                        </div>
-                </nav>
-	</div>
+            <ul class="navbar-nav" >
+                <li class="nav-item" >
+                    <a class="navbar-current navbar-element nav-link navbar-font"> Home </a>
+                </li>
 
-	<div style="display:inline-block; margin:5vh 3vw; max-width:45vw;">
-		<h1 style="font-size:69px;"> HomeguARD </h1> <br>
-		<h3 style="font-style: italic"> HomeguARD е иновативна система за сигурност, разработена от отбора Memelitrix за HackTUES 9. <br><br>
-		 Системата използва съвкупност от сензори, засичащи
-			всяко потенциално неоторизирано влизане във Вашата собственост. Отчетените нарушения биват изпратени към сървър, запазвайки информация за
-			съответната нередност и сигнализирайки околните HARD системи за налична опасност. <br><br>
-			<b> Използваните технологии включват:</b><br> 
-		</h3>
+                <li class="nav-item">
+                    <a class="navbar-element nav-link navbar-font" href="/about_us"> About us </a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-element nav-link navbar-font" href="/map"> Map </a>
+                </li>
+            </ul>
 
-		<ul> 
-			<li> <h4> Физическо засичане на влизане с взлом - лазерна система и инфрачервен сензор, свързани към ESP32 микроконтролер. </h4></li>	
-			<li> <h4> Сървър - Python Flask и MongoDB. </h4></li>	
-			<li> <h4> Функционалности и връзка с уебсайта - JavaScript и TomTom API. </h4></li>	
-			<li> <h4> Разработка на мобилното приложение - MIT App Inventor. </h4></li>	
-			<li> <h4> Визията на сайта - HTML, CSS, JavaScript и Bootstrap. </h4></li>	
-		</ul>
-	</div>
+            <div class="navbar-unit nav-item">
+                <a class="nav-link dropdown-toggle navbar-font" id="navbarDropdown"  data-bs-toggle="dropdown"> Profile </a>
 
-	<div style="display:inline-block; margin-left: 50vw;">
-	</div>
+                <ul class="dropdown-menu navbar-font" >
+                    <li><a class="navbar-element dropdown-item" href="/login" id="login_drop">Log in</a></li>
+                    <li><a class="navbar-element dropdown-item" href="/register" id="register_drop">Sign up</a></li>
+                    <li><a class="navbar-element dropdown-item" style="display:none" id="sign_drop">Sign out</a></li>
+                </ul>
+            </div>
+        </nav>
 
-	<script src="{{ url_for('static', filename='/js/requests/js') }}"></script>
-	<script src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
-	<script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
-</body>
+        <div class="description">
+            <h1 > HomeguARD </h1> <br>
+            <h3 > HomeguARD е иновативна система за сигурност, разработена от отбора Memelitrix за HackTUES 9. <br><br>
+                Системата използва съвкупност от сензори, засичащи
+                всяко потенциално неоторизирано влизане във Вашата собственост. Отчетените нарушения биват изпратени към сървър, запазвайки информация за
+                съответната нередност и сигнализирайки околните HARD системи за налична опасност. <br><br>
+                <b> Използваните технологии включват:</b><br> 
+            </h3>
+
+            <ul> 
+                <li> <h4> Физическо засичане на влизане с взлом - лазерна система и инфрачервен сензор, свързани към ESP32 микроконтролер. </h4></li>	
+                <li> <h4> Сървър - Python Flask и MongoDB. </h4></li>	
+                <li> <h4> Функционалности и връзка с уебсайта - JavaScript и TomTom API. </h4></li>	
+                <li> <h4> Разработка на мобилното приложение - MIT App Inventor. </h4></li>	
+                <li> <h4> Визията на сайта - HTML, CSS, JavaScript и Bootstrap. </h4></li>	
+            </ul>
+        </div>
+
+        <script src="{{ url_for('static', filename='/js/requests/js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
+    </body>

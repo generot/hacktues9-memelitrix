@@ -1,93 +1,89 @@
 <!DOCTYPE html>
 <html lang = "en">
-<head>
+    <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-         <title>HARD</title>
-	<link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
-         
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/about_us.css') }}">
-	<script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.bundle.js') }}"></script>
-</head>
+        <title>HARD</title>
+        <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
 
-<body style="overflow:hidden;">
-        <div class="background-gradient example" >
-		<nav class="navbar navbar-expand-lg navbar-light" style="float:left;position:relative;width:100vw!important;height:6.25vh">
-                        <div class="container-fluid">
-                                <a class="text-white hover-underline-animation navbar-brand navbar-font" style="position:absolute;left:4vw"href="https://github.com/generot/hacktues9-memelitrix">HARD</a>
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="position:relative;float:left;left:42vw">
-                                        <li class="nav-item">
-                                                <a class="text-white hover-underline-animation nav-link navbar-font" href="/">Home</a>
-                                        </li>
-                                        <li class="nav-item" >
-                                                <a class="text-white hover-underline-animation-current current-page nav-link active navbar-font" aria-current="page">About us</a>
-                                        </li>
-                                        <li class="nav-item">
-                                                <a class="text-white hover-underline-animation  nav-link navbar-font" href="/map">Map</a>
-                                        </li>
-                                        <li class="nav-item dropdown" style="position:relative;left:36vw!important;">
-                                                <a class="text-white nav-link dropdown-toggle navbar-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Profile
-                                                </a>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/about_us.css') }}">
+        <script src="{{ url_for('static', filename='/bootstrap/js/bootstrap.bundle.js') }}"></script>
+    </head>
 
-                                                <ul class="dropdown-menu navbar-font" aria-labelledby="navbarDropdown" style="background-color:#57393c!important;text-align:right">
-                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="/login" id="login_drop">Log in</a></li>
-                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right" href="/register" id="register_drop">Sign up</a></li>
-                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right;display:none" href="" id="sign_drop">Sign out</a></li>
-                                                </ul>
-                                        </li>
-                                        </ul>
-                                </div>
-                        </div>
-                </nav>
-	</div>
+    <body style="overflow:hidden;">
+        <nav class="navbar navbar-unit navbar-expand-lg navbar-light">
+            <a class="navbar-brand navbar-font" href="https://github.com/generot/hacktues9-memelitrix"> HARD </a>
 
-	<div class="card" style="margin-left:3.75vw;">
-		<img src="../images/sasho.jpg" >
-		<div class="desc">
-			<h3> Алекс Огнянов </h3>
-			<h4> Back End </h4>
-		</div>
-	</div>
+            <ul class="navbar-nav" >
+                <li class="nav-item" >
+                    <a class="navbar-element nav-link navbar-font" href="/" > Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-current navbar-element nav-link navbar-font"> About us </a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-element nav-link navbar-font" href="/map"> Map </a>
+                </li>
+            </ul>
 
-	<div class="card" >
-		<img src="../images/sasho.jpg" >
-		<div class="desc">
-			<h3> Димитър Николов </h3>
-			<h4> Front End </h4>
-		</div>
-	</div>
+            <div class="nav-item">
+                <a class="nav-link dropdown-toggle navbar-font" id="navbarDropdown"  data-bs-toggle="dropdown"> Profile </a>
 
-	<div class="card" >
-		<img src="../images/sasho.jpg" >
-		<div class="desc">
-			<h3> Мартин Наков </h3>
-			<h4> Embedded </h4>
-		</div>
-	</div>
+                <ul class="dropdown-menu navbar-font" >
+                    <li><a class="navbar-element dropdown-item" href="/login" id="login_drop">Log in</a></li>
+                    <li><a class="navbar-element dropdown-item" href="/register" id="register_drop">Sign up</a></li>
+                    <li><a class="navbar-element dropdown-item" style="display:none" id="sign_drop">Sign out</a></li>
+                </ul>
+            </div>
+        </nav>
 
-	<div class="card" >
-		<img src="../images/sasho.jpg" >
-		<div class="desc">
-			<h3> Венелин Новаков </h3>
-			<h4> Mobile App </h4>
-		</div>
-	</div>
+        <div class="cards"> 
+            <div class="card">
+                <img src="../images/sasho.jpg" >
+                <div class="desc">
+                    <h3> Алекс Огнянов </h3>
+                    <h4> Back End </h4>
+                </div>
+            </div>
 
-	<div class="card" >
-		<img src="../images/sasho.jpg" >
-		<div class="desc">
-			<h3> Емил Дойчинов </h3>
-			<h4> Map API </h4>
-		</div>
-	</div>
+            <div class="card" >
+                <img src="../images/sasho.jpg" >
+                <div class="desc">
+                    <h3> Димитър Николов </h3>
+                    <h4> Front End </h4>
+                </div>
+            </div>
 
-	<script src="{{ url_for('static', filename='/js/requests/js') }}"></script>
-	<script src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
-	<script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
-</body>
+            <div class="card" >
+                <img src="../images/sasho.jpg" >
+                <div class="desc">
+                    <h3> Мартин Наков </h3>
+                    <h4> Embedded </h4>
+                </div>
+            </div>
+
+            <div class="card" >
+                <img src="../images/sasho.jpg" >
+                <div class="desc">
+                    <h3> Венелин Новаков </h3>
+                    <h4> Mobile App </h4>
+                </div>
+            </div>
+
+            <div class="card" >
+                <img src="../images/sasho.jpg" >
+                <div class="desc">
+                    <h3> Емил Дойчинов </h3>
+                    <h4> Map API </h4>
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='/js/requests/js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
+    </body>

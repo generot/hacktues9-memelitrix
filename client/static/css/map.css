@@ -1,52 +1,74 @@
+body {
+    overflow:hidden;
+}
+
+.map {
+    width: 80vw; 
+    height: 94vh;
+}
+
+.taskline {
+ text-align: center; 
+ width: 20vw; 
+ height: 94vh; 
+ margin: -94vh 80vw;
+}
+
+.icon {
+    display: inline; 
+    width: 1.5vw; 
+    height: 3vh;
+}
+
 .intrusion_marker {
-  background-image: url("../images/reddot.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 20px;
-  height: 20px;
+    background-image: url("../images/reddot.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
 }
 
 .user_marker {
-  background-image: url("../images/bluedot.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 20px;
-  height: 20px;
+    background-image: url("../images/bluedot.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
 }
 
 .device_card {
-  display:inline-block; 
-  background-color:#171f32; 
-  width:13vw; 
-  margin: 2.5vh 3.5vw; 
-  border-radius:15px; 
-  border-style: solid; 
-  border-color: white; 
-  border-width: 0.25em; 
-  max-height:30.5vh;
+    display:inline-block; 
+    background-color:#171f32; 
+    width:13vw; 
+    margin: 2.5vh 3.5vw; 
+    border-radius:15px; 
+    border-style: solid; 
+    border-color: white; 
+    border-width: 0.25em; 
+    max-height:30.5vh;
 }
 
 .device_card_selected {
-	color: black !important;
-	background-color: #bea5ab !important;
-  width:13vw; 
-  margin: 2.5vh 3.5vw; 
-  border-radius:15px; 
-  border-style: solid; 
-  border-color: white; 
-  border-width: 0.25em; 
-  max-height:30.5vh;
+    color: black !important;
+    background-color: #bea5ab !important;
+    width:13vw; 
+    margin: 2.5vh 3.5vw; 
+    border-radius:15px; 
+    border-style: solid; 
+    border-color: white; 
+    border-width: 0.25em; 
+    max-height:30.5vh;
 }
 
 
 
 .device_card > h3{
-  text-align:center;
-  color : white;
+    text-align:center;
+    color : white;
 }
 
 input[type=text] {
-	border: 0px solid black;
+    border: 0px solid black;
     border-bottom-width: 1px;
     background-color: transparent;
 }
