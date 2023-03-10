@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import json
 import random
 import string
+from math import *
 
 load_dotenv()
 uri = os.environ["MONGODB_URI"]
@@ -96,6 +97,13 @@ def add_device(id, owner_id, lat, lon):
     return {"code": 200, "message": "Device registered successfully", "API_key": str(API_key)}
 
 
+def dist(lat1, lon1, lat2, lon2):
+    lat1 = float(lat1)
+    lon1 = float(lon1)
+    lat2 = float(lat2)
+    lon2 = float(lon2)
+    return acos( sin(lat1)*sin(lat2) + cos(lat1)*cos(lat2)*cos(lon2-lon1) )*6371
+
 def check_owner(owner_id):
     for i in users.find({}):
         if str(i["_id"]) == owner_id:
@@ -181,6 +189,7 @@ def add_owner(device_id, owner_id):
         new_array = []
 
     new_array.append(device_id)
+    new_array.sort()
     values = {"$set": {"owner_id": owner_id}}
 
     users.update_one(owner_schema, {"$set": {"device_ids": new_array}})
@@ -231,6 +240,34 @@ def get_break_ins(device_id, user_API_key):
                 {"device_id": i["device_id"],
                 "lat": i["lat"], "lon": i["lon"]}
             )
+
+    return {"code": 200, "break_ins": breaks}
+
+def get_break_ins_filter(device_id, user_API_key, radius):
+    if check_device(device_id, False) == 0:
+        return {"code": 404, "message": "Device not found"}
+    
+    if check_user_api_key(user_API_key) == 0:
+        return {"code": 404, "message": "User not found"}
+
+    if ObjectId(get_device_by_ID(device_id)["owner_id"]) != get_user_by_API_key(user_API_key)["_id"]:
+        return {"code": 403, "message": "Permission denied"}
+
+    breaks = []
+
+    device = get_device_by_ID(device_id)
+    breaks.append(
+                {"device_id": device_id,
+                "lat": device["lat"], "lon": device["lon"]}
+            )
+
+    for i in break_ins.find({}):
+        if i["device_id"] != device_id:
+            if dist(device["lat"], device["lon"], i["lat"], i["lon"]) <= float(radius):
+                breaks.append(
+                    {"device_id": i["device_id"],
+                    "lat": i["lat"], "lon": i["lon"]}
+                )
 
     return {"code": 200, "break_ins": breaks}
 
