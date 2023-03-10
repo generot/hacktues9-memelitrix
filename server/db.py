@@ -13,6 +13,7 @@ load_dotenv()
 uri = os.environ["MONGODB_URI"]
 PUBLIC = os.environ["VAPID_PUBLIC"]
 PRIVATE = os.environ["VAPID_PRIVATE"]
+SUBJECT = os.environ["VAPID_SUBJECT"]
 
 client = pymongo.MongoClient(uri)
 db = client["data"]
@@ -283,28 +284,11 @@ def get_devices_for_user(API_key):
 
 
 def get_public_key():
-    return PUBLIC
+    return {"public": PUBLIC}
 
 
-def push():
-    # (B3-1) GET SUBSCRIBER
-    sub = json.loads(request.form["sub"])
+def add_sub_key(API_key, sub):
+    user_schema = {"API_key": API_key}
+    values = {"$set": {"sub": sub}}
 
-    # (B3-2) TEST PUSH NOTIFICATION
-    result = "OK"
-    try:
-        webpush(
-            subscription_info=sub,
-            data=json.dumps({
-                "title": "Welcome!",
-                "body": "Yes, it works!",
-                "icon": "static/i-ico.webp",
-                "image": "static/i-banner.webp"
-            }),
-            vapid_private_key=VAPID_PRIVATE,
-            vapid_claims={"sub": VAPID_SUBJECT}
-        )
-    except WebPushException as ex:
-        print(ex)
-        result = "FAILED"
-    return result
+    users.update_one(user_schema, values)

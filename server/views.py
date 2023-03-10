@@ -1,14 +1,28 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, make_response, send_from_directory
 from flask_cors import cross_origin
 import db
 import json
+from dotenv import load_dotenv
+import os
+from pywebpush import webpush, WebPushException
 
 views = Blueprint("views", "views")
+
+load_dotenv()
+uri = os.environ["MONGODB_URI"]
+PUBLIC = os.environ["VAPID_PUBLIC"]
+PRIVATE = os.environ["VAPID_PRIVATE"]
+SUBJECT = os.environ["VAPID_SUBJECT"]
 
 
 @views.route("/")
 def home():
     return render_template("index.html")
+
+
+@views.route("/test")
+def test():
+    return render_template("test.html")
 
 
 @views.route("/map")
@@ -142,3 +156,33 @@ def get_devices_for_user():
 @views.route("/getPublic", methods=["GET"])
 def get_public():
     return db.get_public_key()
+
+
+@views.route("/addSubToUser", methods=["POST"])
+def add_sub_to_user():
+    sub = json.loads(request.form["sub"])
+    API_key = json.loads(request.form["API_key"])
+
+    return db.add_sub_key(API_key, sub)
+
+
+@views.route("/push", methods=["POST"])
+def push():
+    sub = json.loads(request.form["sub"])
+
+    result = "OK"
+    try:
+        webpush(
+            subscription_info=sub,
+            data=json.dumps({
+                "title": "Welcome!",
+                "body": "Yes, it works!",
+                "icon": "static/images/logo.png"
+            }),
+            vapid_private_key=PRIVATE,
+            vapid_claims={"sub": SUBJECT}
+        )
+    except WebPushException as ex:
+        print(ex)
+        result = "FAILED"
+    return result

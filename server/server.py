@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, make_response, send_from_directory
 from views import views
 from flask_cors import CORS
 from pywebpush import webpush, WebPushException
@@ -12,6 +12,14 @@ app.register_blueprint(views, url_prefix="/")
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+@app.route("/sw.js")
+def sw():
+    response = make_response(
+        send_from_directory(os.path.abspath("../client/static/js"), "sw.js"))
+    return response
+
 
 if(__name__ == "__main__"):
     app.run(debug=True)
