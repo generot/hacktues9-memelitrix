@@ -1,105 +1,115 @@
+body {
+    background-color: #556989;
+}
+
+.icon {
+    border-radius: 50%; 
+    height: 17.5vh; 
+    width: 9vw;
+}
+
 .container {
-  margin: auto;
-  width: 30%;
-  height: 100%;
-  border: 3px solid #73AD21;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-width : 10px;
-  box-sizing: border-box;
+    margin: auto;
+    width: 30%;
+    height: 100%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-width : 10px;
+    box-sizing: border-box;
 }
 
 input[type=text], input[type=password] {
-  width: 20vw;
-  height: 4.5vh;
-  margin: 1vh 0vw;
-  display: inline-block;
-  text-align: left;
-  color: white;
+    width: 20vw;
+    height: 4.5vh;
+    margin: 1vh 0vw;
+    display: inline-block;
+    text-align: left;
+    color: white;
 
-	border: 0px solid white;
+    border: 0px solid white;
     border-bottom-width: 1px;
     background-color: transparent;
 }
 .form_text{
-  text-align: center;
+    text-align: center;
 }
 
- .submit{
-  background-color: rgba(69, 69, 69, 0);
-  border: none;
-  color:white !important;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 550;
-  font-size: 1.3em;
-  margin-top:6vh;
+.submit{
+    background-color: rgba(69, 69, 69, 0);
+    border: none;
+    color:white !important;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 550;
+    font-size: 1.3em;
+    margin-top:7vh;
 }
 
 .submit-underline:after {
-  content: '';
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  transform: scaleX(0);
-  height: 0.2em;
-  bottom: 0.7em;
-  left: 0;
-  background-color: white;
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+    content: '';
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    transform: scaleX(0);
+    height: 0.2em;
+    bottom: 0.7em;
+    left: 0;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
 }
 
 .submit-underline:hover:after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 .center-block{
-  display:inline-block;
-  margin-left:35vw;
-  margin-top:20vh;
-  width:30vw;
-  height: 50vh; 
-  background-color: #171F32;
-  color:white;
-  text-align:center;
-  border-radius:25px;
-  padding-top:4vh;
-  border-style: solid;
-  border-color: white;
-  border-width: 0.35em;
+    display:inline-block;
+    margin-left:35vw;
+    margin-top:20vh;
+    width:30vw;
+    height: 50vh; 
+    background-color: #171F32;
+    color:white;
+    text-align:center;
+    border-radius:25px;
+    padding-top:4vh;
+    border-style: solid;
+    border-color: white;
+    border-width: 0.35em;
 }
 
 .user-pass{
-  color: white !important;
-  font-weight: 550;
-  font-size: 1.05em;
-  letter-spacing: 0.06em;
-  margin-top: 2vh;
+    color: white !important;
+    font-weight: 550;
+    font-size: 1.05em;
+    letter-spacing: 0.06em;
+    margin-top: 2vh;
 }
 
 @media (max-width: 768px){
-  .center-block{
-    display:inline-grid;
-    margin-top: 0vh;
-    top: 15vh;
-    margin-left:15vw;
-    width: 70vw;
-    height: 60vh;
-    position:relative;
-    padding-top: 2vh;
-  }
+    .center-block{
+        display:inline-grid;
+        margin-top: 0vh;
+        top: 15vh;
+        margin-left:15vw;
+        width: 70vw;
+        height: 60vh;
+        position:relative;
+        padding-top: 2vh;
+    }
 
-  input[type=text], input[type=password] {
-    display:inline-block;
-    width: 50vw;
-    height: 5vh;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-radius:10px;
-    text-align: center;
-  }
+    input[type=text], input[type=password] {
+        display:inline-block;
+        width: 50vw;
+        height: 5vh;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-radius:10px;
+        text-align: center;
+    }
 
 }
 

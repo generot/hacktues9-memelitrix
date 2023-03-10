@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang = "en">
-<head>
+    <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-         <title>HARD</title>
-	<link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
+        <title>HARD</title>
+        <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
 
         <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
@@ -14,73 +14,53 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/bootstrap/css/bootstrap.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='/css/map.css') }}">
-</head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/map.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/map.css') }}">
+    </head>
 
-<body style="overflow:hidden">
-        <div class="background-gradient example">
-                <nav class="navbar navbar-expand-lg navbar-light"
-                        style="float:left;position:relative;width:100vw!important;">
-                        <div class="container-fluid">
-                                <a class="text-white hover-underline-animation navbar-brand navbar-font"
-                                        style="position:absolute;left:4vw"
-                                        href="https://github.com/generot/hacktues9-memelitrix">HARD</a>
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0"
-                                                style="position:relative;float:left;left:42vw">
-                                                <li class="nav-item">
-                                                        <a class="text-white hover-underline-animation nav-link navbar-font"
-                                                                href="/">Home</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                        <a class="text-white hover-underline-animation nav-link navbar-font"
-                                                                href="/about_us">About us</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                        <a class="text-white hover-underline-animation-current current-page nav-link active navbar-font"
-                                                                aria-current="paige">Map</a>
-                                                </li>
-                                                <li class="nav-item dropdown"
-                                                        style="position:relative;left:36vw!important;">
-                                                        <a class="text-white nav-link dropdown-toggle navbar-font"
-                                                                href="#" id="navbarDropdown" role="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                Profile
-                                                        </a>
+    <body >
+        <nav class="navbar navbar-unit navbar-expand-lg navbar-light">
+            <a class="navbar-brand navbar-font" href="https://github.com/generot/hacktues9-memelitrix"> HARD </a>
 
-                                                        <ul class="dropdown-menu navbar-font"
-                                                                aria-labelledby="navbarDropdown"
-                                                                style="background-color:#57393c!important;text-align:right">
-                                                                <li><a class="text-white hover-underline-animation dropdown-item"
-                                                                                style="float:right" href="/login"
-                                                                                id="login_drop">Log in</a></li>
-                                                                <li><a class="text-white hover-underline-animation dropdown-item"
-                                                                                style="float:right" href="/register"
-                                                                                id="register_drop">Sign up</a></li>
-                                                <li><a class="text-white hover-underline-animation dropdown-item" style="float:right;display:none" href="" id="sign_drop">Sign out</a></li>
-                                                        </ul>
-                                                </li>
-                                        </ul>
-                                </div>
-                        </div>
-                </nav>
+            <ul class="navbar-nav" >
+                <div class="navbar-nav navbar-unit">
+                    <li class="nav-item" >
+                        <a class="navbar-element nav-link navbar-font" href="/"> Home </a>
+                    </li>
+
+                <li class="nav-item">
+                    <a class="navbar-element nav-link navbar-font" href="/about_us"> About us </a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-current navbar-element nav-link navbar-font"> Map </a>
+                </li>
                 </div>
+            </ul>
 
-		<script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
-                <div id="map" style="margin-top:-0.60vh; width:80vw; height:94vh;"></div>
-                <div id="device_container" style="text-align:center; background-color:; width:20vw; height:94vh; margin: -94vh 80vw;"> 
+            <div class="navbar-unit nav-item">
+                <a class="nav-link dropdown-toggle navbar-font" id="navbarDropdown"  data-bs-toggle="dropdown"> Profile </a>
 
-			<div style="padding-top:4vh; padding-bottom:2vh;">
-				<input type="text" placeholder="Username" name="uname" id="username">
-				<img style="display:inline; width:1.5vw; height:3vh;" src="{{ url_for('static', filename='/images/filter_icon.png') }}">
-				<img style="display:inline; width:1.5vw; height:3vh;" src="{{ url_for('static', filename='/images/globe_icon.png') }}">
-			</div>
-		</div>
+                <ul class="dropdown-menu navbar-font" >
+                    <li><a class="navbar-element dropdown-item" href="/login" id="login_drop">Log in</a></li>
+                    <li><a class="navbar-element dropdown-item" href="/register" id="register_drop">Sign up</a></li>
+                    <li><a class="navbar-element dropdown-item" style="display:none" id="sign_drop">Sign out</a></li>
+                </ul>
+            </div>
+        </nav>
 
+        <script src="{{ url_for('static', filename='/js/signout.js') }}"></script>
+        <div class="map" id="map"></div>
 
+        <div class="taskline" id="device_container"> 
+            <div style="padding-top:4vh; padding-bottom:2vh;">
+                <input type="text" placeholder="Username" name="uname" id="username">
+                <img class="icon" src="{{ url_for('static', filename='/images/filter_icon.png') }}">
+                <img class="icon" src="{{ url_for('static', filename='/images/globe_icon.png') }}">
+            </div>
+        </div>
 
-		<script src="{{ url_for('static', filename='/js/requests.js') }}"></script>
-		<script src="{{ url_for('static', filename='/js/map.js') }}"></script>
-</body>
+        <script src="{{ url_for('static', filename='/js/requests.js') }}"></script>
+        <script src="{{ url_for('static', filename='/js/map.js') }}"></script>
+    </body>
 
 </html>

@@ -13,6 +13,7 @@ load_dotenv()
 uri = os.environ["MONGODB_URI"]
 PUBLIC = os.environ["VAPID_PUBLIC"]
 PRIVATE = os.environ["VAPID_PRIVATE"]
+SUBJECT = os.environ["VAPID_SUBJECT"]
 
 client = pymongo.MongoClient(uri)
 db = client["data"]
@@ -63,6 +64,21 @@ def check_user(username, password):
     return {"code": 400, "message": "Username or password is incorrect", "API_key": "null"}
 
 
+def _check_user(username, password):
+    for i in users.find({}):
+        if i["name"] == username:
+            password = password.encode()
+            salt = 32*b'\x00'
+            password_hash = hashlib.pbkdf2_hmac(
+                'sha256', password, salt, 100000)
+
+            if i["password"] == password_hash:
+                return str(i["API_key"])
+            else:
+                return "null"
+
+    return "null"
+
 def fetch_users():
     cursor = users.find({})
     all_users = []
@@ -88,7 +104,7 @@ def verify_user_db(username):
 def add_device(id, owner_id, lat, lon):
     for i in devices.find({}):
         if i["id"] == id:
-            return {"code": 400, "message": "Device already registered"}
+            return "400"
 
     API_key = generate_random_string()
 
@@ -97,7 +113,7 @@ def add_device(id, owner_id, lat, lon):
             'lon': lon, 'API_key': str(API_key)}
     )
 
-    return {"code": 200, "message": "Device registered successfully", "API_key": str(API_key)}
+    return "200"
 
 
 def dist(lat1, lon1, lat2, lon2):
@@ -178,13 +194,13 @@ def get_device_by_ID(id):
 
 def add_owner(device_id, owner_id):
     if check_device_api_key(get_device_API_key_by_ID(device_id)) == 0:
-        return {"code": 403, "message": "Permission denied"}
+        return "403"
 
     if check_owner(owner_id) == 0:
-        return {"code": 404, "message": "User not found"}
+        return "404"
 
     if check_device(device_id) == 0:
-        return {"code": 404, "message": "Device not found or already has an owner"}
+        return "404"
 
     device_schema = {"id": device_id}
     owner_schema = {"_id": ObjectId(owner_id)}
@@ -201,25 +217,29 @@ def add_owner(device_id, owner_id):
     users.update_one(owner_schema, {"$set": {"device_ids": new_array}})
     devices.update_one(device_schema, values)
 
-    return {"code": 200, "message": "Owner added successfully"}
+    return "200"
 
 
 def add_break_in(device_id, API_key):
+    if check_device(device_id, False) == 0:
+        return "404"
+    
     if check_device_api_key(API_key) == 0:
-        return {"code": 403, "message": "Permission denied"}
+        return "403"
 
-    if get_device_by_ID(device_id)["API_key"] != API_key:
-        return {"code": 403, "message": "Permission denied!"}
+    device = get_device_by_ID(device_id)
+    if device["API_key"] != API_key:
+        return "403"
 
+    break_ins.insert_one({"device_id": device["id"], "owner_id": device["owner_id"],"lat": device["lat"], "lon": device["lon"]})
+    
     for i in devices.find({}):
-        if i["id"] == device_id:
-            break_ins.insert_one(
-                {"device_id": i["id"], "owner_id": i["owner_id"],
-                    "lat": i["lat"], "lon": i["lon"]}
-            )
-            return {"code": 200, "message": "Break in added successfully"}
-
-    return {"code": 404, "message": "Could not find device"}
+        if dist(i["lat"], i["lon"], device["lat"], device["lon"]) < 0.1:
+            owner_shema = {"_id": ObjectId(device["owner_id"])}
+            owner = users.find_one(owner_shema)
+            if owner != None:
+                push_notification(owner["sub"])
+    return "200"
 
 
 def get_break_ins(device_id, user_API_key):
@@ -283,14 +303,19 @@ def get_devices_for_user(API_key):
 
 
 def get_public_key():
-    return PUBLIC
+    return {"public": PUBLIC}
 
 
-def push():
-    # (B3-1) GET SUBSCRIBER
-    sub = json.loads(request.form["sub"])
+def add_sub_key(API_key, sub):
+    user_schema = {"API_key": API_key}
+    values = {"$set": {"sub": sub}}
 
-    # (B3-2) TEST PUSH NOTIFICATION
+    users.update_one(user_schema, values)
+
+    return {"code": 200, "message": "Added sub key"}
+
+
+def push_notification(sub):
     result = "OK"
     try:
         webpush(
@@ -298,11 +323,10 @@ def push():
             data=json.dumps({
                 "title": "Welcome!",
                 "body": "Yes, it works!",
-                "icon": "static/i-ico.webp",
-                "image": "static/i-banner.webp"
+                "icon": "static/images/logo.png"
             }),
-            vapid_private_key=VAPID_PRIVATE,
-            vapid_claims={"sub": VAPID_SUBJECT}
+            vapid_private_key=PRIVATE,
+            vapid_claims={"sub": SUBJECT}
         )
     except WebPushException as ex:
         print(ex)
