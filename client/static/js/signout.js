@@ -5,7 +5,8 @@ let sign_out_el = document.getElementById("sign_drop");
 
 let logged = localStorage.getItem("API_KEY");
 
-if(logged){
+console.log(logged);
+if(logged != null && logged != undefined && logged != NaN){
 	sign_out_el.style.display="inline-block";
 	login_el.style.display="none";
 	register_el.style.display="none";
