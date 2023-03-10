@@ -59,9 +59,9 @@ def check_user(username, password):
             if i["password"] == password_hash:
                 return {"code": 200, "message": "User logged in successfully", "username": i["name"], "id": str(i["_id"]), "API_key": str(i["API_key"])}
             else:
-                return {"code": 400, "message": "Username or password is incorrect"}
+                return {"code": 400, "message": "Username or password is incorrect", "API_key": "null"}
 
-    return {"code": 400, "message": "Username or password is incorrect"}
+    return {"code": 400, "message": "Username or password is incorrect", "API_key": "null"}
 
 
 def _check_user(username, password):

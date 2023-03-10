@@ -1,6 +1,6 @@
 .description {
     display:inline-block; 
-    margin:5vh 3vw; 
+    padding: 10vh 4vw;
     max-width:45vw;
 }
 
@@ -11,3 +11,4 @@ h1 {
 h4 {
     font-style: italic;
 }
+

@@ -24,9 +24,20 @@ enum bl_resp_type {
   BL_INVALID = 0
 };
 
+enum endpoint_type {
+  EP_USER_AUTH,
+  EP_ADD_BREAKIN,
+  EP_ADD_OWNER,
+  EP_ADD_DEVICE,
+  EP_INVALID
+};
+
 const int SD_SS = 5;
 
 WiFiClient client;
+
+String client_last_response;
+endpoint_type last_resp_type;
 
 bool credentials_avail = true;
 
@@ -216,6 +227,38 @@ bool post(const char* server_url, const char *route, const char *data, int datal
 
 //========================HTTP REQUEST HANDLING========================
 
+bool authorize_user(bool is_preparsed = false) {
+  if(!is_preparsed) {
+    bl_parse_data();
+  }
+
+  String body = "/_login?username=" + String(field1) + "&password=" + String(field2);
+  String resp = "{\"code\": 200, \"message\": \"OK\"}";
+
+  Serial.println(body);
+
+  if(!post("a041-85-187-10-224.ngrok.io", body.c_str(), resp.c_str(), resp.length())) {
+    return false;
+  }
+
+  Serial.println("Reading response...");
+
+  last_resp_type = EP_USER_AUTH;
+
+  return true;
+}
+
+bool read_client_response(void) {
+  if(client.available()) {
+    //Serial.println(client_last_response);
+    client_last_response = client.readStringUntil('\n');
+  } else if(client_last_response.length()) {
+    return true;
+  }
+
+  return false;  
+}
+
 void setup() {
   Serial.begin(BAUD_RATE);
   BL_SERIAL.begin(BAUD_RATE);
@@ -248,9 +291,11 @@ void setup() {
         Serial.println(F("Connection timed out..."));
         return;
       }
-    }
+    }    
+  }
 
-    //post("4a2a-149-62-206-63.ngrok.io", "/smth", "{\"name\":\"Martin\"}", 17);
+  if(sd_parse_file(F_USER)) {
+    authorize_user();
   }
 
   sd_initialize_file(F_WORLD_POS);
@@ -295,9 +340,7 @@ void bluetooth_int() {
         case BL_USER_CRED:
           Serial.println(F("User credentials entered..."));
 
-          sd_write_file(F_USER, buffer, BUFFER_MAX);
-
-          BL_SERIAL.write("U1");
+          authorize_user(true);
 
           break;
         case BL_LONLAT:
@@ -316,5 +359,23 @@ void bluetooth_int() {
 void loop() {
   if(!credentials_avail) {
     bluetooth_int();
-  } 
+  }
+
+  if(read_client_response()) {
+    switch(last_resp_type) {
+    case EP_USER_AUTH:
+      Serial.println("Code: " + client_last_response);
+      last_resp_type = EP_INVALID;
+
+      if(client_last_response != "null") {
+        sd_write_file(F_USER, buffer, BUFFER_MAX);
+        sd_write_file(F_API_DEV_ID, (char*)client_last_response.c_str(), client_last_response.length());
+
+        BL_SERIAL.write("U1");
+      } else {
+        BL_SERIAL.write("U0");
+      }
+      break;
+    }
+  }
 }

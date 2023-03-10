@@ -133,3 +133,15 @@ function create_device_card(device_id, device_ids){
 
 main()
 
+const closeDrawer = document.querySelector('.drawer-close-action')
+const menuTrigger = document.querySelector('.menu-trigger')
+const drawer = document.querySelector('.drawer')
+
+closeDrawer.addEventListener('click', () => {
+    drawer.classList.add('hidden')
+})
+
+menuTrigger.addEventListener('click', () => {
+    drawer.classList.remove('hidden')
+})
+
