@@ -114,6 +114,8 @@ def add_device(id, owner_id, lat, lon):
             'lon': lon, 'API_key': str(API_key)}
     )
 
+    print(str(API_key))
+
     return str(API_key)
 
 
