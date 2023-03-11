@@ -8,6 +8,7 @@
         <title>HARD</title>
         <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
 
+        <!--
         <script defer src="{{ url_for('static', filename='/js/requests/js') }}"></script>
         <script defer src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
         <script defer src="{{ url_for('static', filename='/js/signout.js') }}"></script>
@@ -15,9 +16,68 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/index.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/about_us.css') }}">
+        -->
+
+        <script defer src="../static/js/auth.js"></script>
+        <script defer src="../static/js/profile.js"></script>
+        <script defer src="../static/js/signout.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/about_us.css">
     </head>
 
     <body>
+        <div class="cards"> 
+            <div class="card">
+                <img class="card-img" src="{{ url_for('static', filename='/images/aleks.jpg') }}" >
+                <div class="desc">
+                    <h3> Алекс Огнянов </h3>
+                    <h4> Back End </h4>
+                </div>
+            </div>
+
+            <div class="card" >
+                <img class="card-img" src="{{ url_for('static', filename='/images/dimitar.jpg') }}" >
+                <div class="desc">
+                    <h3> Димитър Николов </h3>
+                    <h4> Front End </h4>
+                </div>
+            </div>
+
+            <div class="card" >
+                <img class="card-img" src="{{ url_for('static', filename='/images/valentin.jpg') }}" >
+                <div class="desc">
+                    <h3> Валентин Спасов </h3>
+                    <h4> Ментор </h4>
+                </div>
+            </div>
+
+            <div class="card" >
+                <img class="card-img" src="{{ url_for('static', filename='/images/martin.jpg') }}" >
+                <div class="desc">
+                    <h3> Мартин Наков </h3>
+                    <h4> Embedded </h4>
+                </div>
+            </div>
+
+            <div class="card" >
+                <img class="card-img" src="{{ url_for('static', filename='/images/venelin.jpg') }}" >
+                <div class="desc">
+                    <h3> Венелин Новаков </h3>
+                    <h4> Mobile App </h4>
+                </div>
+            </div>
+
+            <div class="card" >
+                <img class="card-img" src="{{ url_for('static', filename='/images/emil.jpg') }}" >
+                <div class="desc">
+                    <h3> Емил Дойчинов </h3>
+                    <h4> Map API </h4>
+                </div>
+            </div>
+        </div>
+
         <nav class="navigation-bar">
             <ul class="navigation-route-list">
                 <li class="navigation-route-item">
@@ -64,47 +124,5 @@
 
             </ul>
         </nav>
-
-        <div class="cards"> 
-            <div class="card">
-                <img class="card-img" src="../images/sasho.jpg" >
-                <div class="desc">
-                    <h3> Алекс Огнянов </h3>
-                    <h4> Back End </h4>
-                </div>
-            </div>
-
-            <div class="card" >
-                <img class="card-img" src="../images/sasho.jpg" >
-                <div class="desc">
-                    <h3> Димитър Николов </h3>
-                    <h4> Front End </h4>
-                </div>
-            </div>
-
-            <div class="card" >
-                <img class="card-img" src="../images/sasho.jpg" >
-                <div class="desc">
-                    <h3> Мартин Наков </h3>
-                    <h4> Embedded </h4>
-                </div>
-            </div>
-
-            <div class="card" >
-                <img class="card-img" src="../images/sasho.jpg" >
-                <div class="desc">
-                    <h3> Венелин Новаков </h3>
-                    <h4> Mobile App </h4>
-                </div>
-            </div>
-
-            <div class="card" >
-                <img class="card-img" src="../images/sasho.jpg" >
-                <div class="desc">
-                    <h3> Емил Дойчинов </h3>
-                    <h4> Map API </h4>
-                </div>
-            </div>
-        </div>
 
     </body>
