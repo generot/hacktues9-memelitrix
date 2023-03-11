@@ -17,6 +17,8 @@
 
 #define SERVER_PORT 80
 
+#define PIN_PIR1 25
+
 enum bl_resp_type {
   BL_WIFI_CRED = 'W',
   BL_USER_CRED = 'U',
@@ -42,6 +44,7 @@ String client_last_response;
 endpoint_type last_resp_type;
 
 bool credentials_avail = true;
+bool initialization_done = false;
 
 char buffer[BUFFER_MAX] = {0};
 
@@ -167,32 +170,6 @@ bool sd_initialize_file(const char *ptr) {
   return true;
 }
 
-// bool sd_initialize_files(void) {
-//   Serial.println("Initializing files...");
-
-//   f = SD.open("/paths.txt");
-
-//   while(f.available()) {
-//     char ch = f.read();
-
-//     if(ch != ';') {
-//       field1[path_i++] = ch;
-//     } else {
-//       path_i = 0;
-
-//       Serial.println(field1);
-//       f2 = SD.open(field1, FILE_WRITE);
-//       f2.close();
-
-//       for(int i = 0; i < ID_MAX; i++) {
-//         field1[i] = 0;
-//       }
-//     }
-//   }
-
-//   return false;
-// }
-
 //========================SD HANDLING========================
 
 //========================HTTP REQUEST HANDLING========================
@@ -239,7 +216,7 @@ bool send_to_endpoint(String& route, endpoint_type tp) {
 
   Serial.println(route);
 
-  if(!post("3929-85-187-10-224.ngrok.io", route.c_str(), resp.c_str(), resp.length())) {
+  if(!post("bc8e-85-187-10-224.ngrok.io", route.c_str(), resp.c_str(), resp.length())) {
     return false;
   }
 
@@ -261,7 +238,7 @@ bool authorize_user(bool is_preparsed = false) {
 }
 
 bool add_device() {
-  dev_id = rand();
+  dev_id = micros();
 
   String url = "/addDevice?id=" + String(dev_id) + "&lon=" + String(field2) + "&lat=" + String(field1);
   
@@ -272,6 +249,12 @@ bool add_owner() {
   String url = "/addOwner?device_id=" + String(dev_id) + "&owner_id=" + usr_id;
 
   return send_to_endpoint(url, EP_ADD_OWNER);
+}
+
+bool add_breakin() {
+  String url = "/addBreakIn?id=" + String(dev_id) + "&API_key=" + api_token;
+
+  return send_to_endpoint(url, EP_ADD_BREAKIN);
 }
 
 bool read_client_response(void) {
@@ -294,9 +277,11 @@ void setup() {
   delay(500);
   while(!Serial) { ; }
 
+  pinMode(PIN_PIR1, INPUT);
+
   if(!SD.begin(SD_SS)) {
     Serial.println("SD: Initialization failed.");
-    return;
+    while(true) { ; }
   }
 
   Serial.println("SD: Connected successfully.");
@@ -324,8 +309,13 @@ void setup() {
 
   if(sd_parse_file(F_API_DEV_ID)) {
     bl_parse_data();
+    Serial.println(field1);
+    Serial.println(field2);
+
     api_token = String(field1);
     dev_id = atoi(field2);
+
+    initialization_done = true;
   }
 
   sd_initialize_file(F_WORLD_POS);
@@ -393,14 +383,21 @@ void loop() {
     bluetooth_int();
   }
 
-  if(read_client_response()) {
-    Serial.println("Code: " + client_last_response);
-    last_resp_type = EP_INVALID;
+  // if(digitalRead(PIN_PIR1) && initialization_done) {
+  //   Serial.println("Movement detected...");
+  //   add_breakin();
 
+  //   delay(5000);
+  // }
+
+  if(read_client_response()) {
     String temp_file_content;
 
     switch(last_resp_type) {
     case EP_USER_AUTH:
+      Serial.println("Code: " + client_last_response);
+      last_resp_type = EP_INVALID;
+
       if(client_last_response != "null") {
         sd_write_file(F_USER, buffer, BUFFER_MAX);
         
@@ -416,12 +413,24 @@ void loop() {
         api_token = String(client_last_response);
         temp_file_content = "D$" + api_token + "$" + String(dev_id);
 
+        Serial.println("Token: " + api_token);
+
         sd_write_file(F_API_DEV_ID, (char*)temp_file_content.c_str(), temp_file_content.length());
 
         add_owner();
       }
+      break;
+    case EP_ADD_OWNER:
+      initialization_done = true;
+      break;
+    case EP_ADD_BREAKIN:
+      if(client_last_response == "200") {
+        Serial.println("Break-in successfully added!");
+      }
 
       break;
     }
+
+    client_last_response = "";
   }
 }
