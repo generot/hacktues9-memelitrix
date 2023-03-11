@@ -178,9 +178,7 @@ const createDevice = (id, date) => {
 
 async function main() {
     const response = await getFromRoute(
-        queryStringParams("http://127.0.0.1:80/getDevices", [
-            ["API_key", API_KEY],
-        ])
+        queryStringParams("/getDevices", [["API_key", API_KEY]])
     );
 
     response.device_ids.forEach((device_id, index) => {

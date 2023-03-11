@@ -1,7 +1,5 @@
 async function regWorker() {
-    const { public: publicKey } = await getFromRoute(
-        "http://127.0.0.1:80/getPublic"
-    );
+    const { public: publicKey } = await getFromRoute("/getPublic");
 
     navigator.serviceWorker.register("/sw.js", { scope: "/" });
 
