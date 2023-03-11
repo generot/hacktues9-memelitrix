@@ -36,7 +36,9 @@ const int SD_SS = 5;
 
 WiFiClient client;
 
+String api_token;
 String client_last_response;
+
 endpoint_type last_resp_type;
 
 bool credentials_avail = true;
@@ -47,6 +49,9 @@ char field1[ID_MAX] = {0};
 char field2[ID_MAX] = {0};
 
 int buf_len = 0;
+
+String usr_id;
+int dev_id = 0;
 
 //========================BLUETOOTH HANDLING========================
 
@@ -227,25 +232,46 @@ bool post(const char* server_url, const char *route, const char *data, int datal
 
 //========================HTTP REQUEST HANDLING========================
 
+//========================BACKEND HANDLING=============================
+
+bool send_to_endpoint(String& route, endpoint_type tp) {
+  String resp = "{\"code\": 200, \"message\": \"OK\"}";
+
+  Serial.println(route);
+
+  if(!post("3929-85-187-10-224.ngrok.io", route.c_str(), resp.c_str(), resp.length())) {
+    return false;
+  }
+
+  Serial.println("Reading response...");
+
+  last_resp_type = (endpoint_type)tp;
+
+  return true;
+}
+
 bool authorize_user(bool is_preparsed = false) {
   if(!is_preparsed) {
     bl_parse_data();
   }
 
   String body = "/_login?username=" + String(field1) + "&password=" + String(field2);
-  String resp = "{\"code\": 200, \"message\": \"OK\"}";
 
-  Serial.println(body);
+  return send_to_endpoint(body, EP_USER_AUTH);
+}
 
-  if(!post("a041-85-187-10-224.ngrok.io", body.c_str(), resp.c_str(), resp.length())) {
-    return false;
-  }
+bool add_device() {
+  dev_id = rand();
 
-  Serial.println("Reading response...");
+  String url = "/addDevice?id=" + String(dev_id) + "&lon=" + String(field2) + "&lat=" + String(field1);
+  
+  return send_to_endpoint(url, EP_ADD_DEVICE);  
+}
 
-  last_resp_type = EP_USER_AUTH;
+bool add_owner() {
+  String url = "/addOwner?device_id=" + String(dev_id) + "&owner_id=" + usr_id;
 
-  return true;
+  return send_to_endpoint(url, EP_ADD_OWNER);
 }
 
 bool read_client_response(void) {
@@ -258,6 +284,8 @@ bool read_client_response(void) {
 
   return false;  
 }
+
+//========================BACKEND HANDLING=============================
 
 void setup() {
   Serial.begin(BAUD_RATE);
@@ -294,8 +322,10 @@ void setup() {
     }    
   }
 
-  if(sd_parse_file(F_USER)) {
-    authorize_user();
+  if(sd_parse_file(F_API_DEV_ID)) {
+    bl_parse_data();
+    api_token = String(field1);
+    dev_id = atoi(field2);
   }
 
   sd_initialize_file(F_WORLD_POS);
@@ -346,6 +376,8 @@ void bluetooth_int() {
         case BL_LONLAT:
           Serial.println(F("Lonlat received!"));
           
+          add_device();
+
           sd_write_file(F_WORLD_POS, buffer, BUFFER_MAX);
           credentials_avail = true;
 
@@ -362,19 +394,33 @@ void loop() {
   }
 
   if(read_client_response()) {
+    Serial.println("Code: " + client_last_response);
+    last_resp_type = EP_INVALID;
+
+    String temp_file_content;
+
     switch(last_resp_type) {
     case EP_USER_AUTH:
-      Serial.println("Code: " + client_last_response);
-      last_resp_type = EP_INVALID;
-
       if(client_last_response != "null") {
         sd_write_file(F_USER, buffer, BUFFER_MAX);
-        sd_write_file(F_API_DEV_ID, (char*)client_last_response.c_str(), client_last_response.length());
+        
+        usr_id = String(client_last_response);
 
         BL_SERIAL.write("U1");
       } else {
         BL_SERIAL.write("U0");
       }
+      break;
+    case EP_ADD_DEVICE:
+      if(client_last_response != "null") {
+        api_token = String(client_last_response);
+        temp_file_content = "D$" + api_token + "$" + String(dev_id);
+
+        sd_write_file(F_API_DEV_ID, (char*)temp_file_content.c_str(), temp_file_content.length());
+
+        add_owner();
+      }
+
       break;
     }
   }
