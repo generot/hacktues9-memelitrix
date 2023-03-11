@@ -8,6 +8,7 @@ import random
 import string
 from math import *
 from pywebpush import webpush, WebPushException
+import datetime
 
 load_dotenv()
 uri = os.environ["MONGODB_URI"]
@@ -231,15 +232,22 @@ def add_break_in(device_id, API_key):
     if device["API_key"] != API_key:
         return "null"
 
-    break_ins.insert_one({"device_id": device["id"], "owner_id": device["owner_id"],"lat": device["lat"], "lon": device["lon"]})
+
+    date = datetime.datetime.now()
+    break_ins.insert_one({"device_id": device["id"], "owner_id": device["owner_id"],"lat": device["lat"], "lon": device["lon"], "date": date.isoformat()})
+
+    device_schema = {"id": device_id}
+    values = {"$set": {"last_break_in": date}}
+
+    devices.update_one(device_schema, values)
     
     for i in devices.find({}):
-        if dist(i["lat"], i["lon"], device["lat"], device["lon"]) < 0.1:
-            owner_shema = {"_id": ObjectId(device["owner_id"])}
-            owner = users.find_one(owner_shema)
+        #if dist(i["lat"], i["lon"], device["lat"], device["lon"]) < 9999999:
+        owner_shema = {"_id": ObjectId(i["owner_id"])}
+        owner = users.find_one(owner_shema)
 
-            if "sub" in owner:
-                push_notification(owner["sub"])
+        if "sub" in owner:
+            push_notification(owner["sub"])
 
     return "200"
 
@@ -258,15 +266,13 @@ def get_break_ins(device_id, user_API_key):
 
     device = get_device_by_ID(device_id)
     breaks.append(
-        {"device_id": device_id,
-         "lat": device["lat"], "lon": device["lon"]}
+        {"device_id": device_id, "lat": device["lat"], "lon": device["lon"], "date": None}
     )
 
     for i in break_ins.find({}):
         if i["device_id"] != device_id:
             breaks.append(
-                {"device_id": i["device_id"],
-                 "lat": i["lat"], "lon": i["lon"]}
+                {"device_id": i["device_id"], "lat": i["lat"], "lon": i["lon"], "date": i["date"]}
             )
 
     return {"code": 200, "break_ins": breaks}
@@ -300,8 +306,19 @@ def get_devices_for_user(API_key):
         return {"code": 404, "message": "User not found"}
 
     user = get_user_by_API_key(API_key)
+    
+    dates = []
 
-    return {"code": 200, "message": "Successfully GOT the owned devices for user", "device_ids": user["device_ids"]}
+    for i in user["device_ids"]:
+        device_schema = {"id" : i}
+
+        device = devices.find_one(device_schema)
+        if "last_break_in" in device:
+            dates.append(device["last_break_in"])
+        else:
+            dates.append(None)
+
+    return {"code": 200, "message": "Successfully GOT the owned devices for user", "device_ids": user["device_ids"], "date": dates}
 
 
 def get_public_key():
@@ -323,7 +340,7 @@ def push_notification(sub):
         webpush(
             subscription_info=sub,
             data=json.dumps({
-                "title": "Itrusion occured",
+                "title": "Intrusion occured",
                 "body": "Break in occured in a device near you",
                 "icon": "static/images/logo.png"
             }),
