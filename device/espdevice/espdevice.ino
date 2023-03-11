@@ -18,6 +18,7 @@
 #define SERVER_PORT 80
 
 #define PIN_PIR1 25
+#define PIN_LASER 26
 
 enum bl_resp_type {
   BL_WIFI_CRED = 'W',
@@ -216,7 +217,7 @@ bool send_to_endpoint(String& route, endpoint_type tp) {
 
   Serial.println(route);
 
-  if(!post("bc8e-85-187-10-224.ngrok.io", route.c_str(), resp.c_str(), resp.length())) {
+  if(!post("memelitrix.loca.lt", route.c_str(), resp.c_str(), resp.length())) {
     return false;
   }
 
@@ -269,6 +270,22 @@ bool read_client_response(void) {
 }
 
 //========================BACKEND HANDLING=============================
+
+void setup1() {
+  Serial.begin(BAUD_RATE);
+  
+  delay(500);
+  while(!Serial) { ; }
+
+  Serial.println("Ready...");
+
+  pinMode(PIN_LASER, OUTPUT);
+  digitalWrite(PIN_LASER, HIGH);
+}
+
+void loop1() {
+  
+}
 
 void setup() {
   Serial.begin(BAUD_RATE);
@@ -383,12 +400,12 @@ void loop() {
     bluetooth_int();
   }
 
-  // if(digitalRead(PIN_PIR1) && initialization_done) {
-  //   Serial.println("Movement detected...");
-  //   add_breakin();
+  if(digitalRead(PIN_PIR1) && initialization_done) {
+    Serial.println("Movement detected...");
+    add_breakin();
 
-  //   delay(5000);
-  // }
+    delay(10000);
+  }
 
   if(read_client_response()) {
     String temp_file_content;

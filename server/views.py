@@ -74,6 +74,15 @@ def login():
     a = db.check_user(username, password)
     return a
 
+@views.route("/_login", methods=["POST"])
+def _login():
+    data = request.args.to_dict()
+    username = data["username"]
+    password = data["password"]
+
+    a = db._check_user(username, password)
+    return a
+
 
 @views.route("/verify", methods=["GET"])
 def verify_user():
