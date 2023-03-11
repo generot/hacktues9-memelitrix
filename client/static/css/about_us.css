@@ -5,14 +5,14 @@ body {
 .cards {
     display: flex;
     justify-content: space-between;
-    padding-left:3.75vw;
-    padding-right:3.75vw;
+    padding-left:1vw;
+    padding-right:1vw;
 }
 
 .card {
 	height: 45vh;
 	width: 15vw;
-	margin-top: 15vh;
+	top: 15vh;
 	display:inline-block;
 	position:relative;
 	transition: width 0.75s, height 0.75s;
@@ -28,16 +28,46 @@ body {
 
 .desc {
 	visibility: hidden;
+    margin-left: 2vw;
 }
 
-.card:hover, .card-img:hover , .card-img:hover + .desc{
-	height: 50vh;
-	width: 17.5vw;
-	visibility:visible;
-	filter: none;
+@media (min-width: 1000px){
+    .card:hover, .card-img:hover , .card-img:hover + .desc{
+        height: 50vh;
+        width: 17.5vw;
+        visibility:visible;
+        filter: none;
+    }
 }
 
-.card:hover {
-	margin-right: 1vw;
-}
 
+@media (max-width: 1000px){
+    body {
+        overflow: visible;
+    }
+    
+    .cards {
+        display:block;
+        justify-content: center;
+        padding-bottom: 11vh;
+    }
+
+    .card {
+        height: 55vh;
+        width: 60vw;
+        position:relative;
+        transition: none;
+        margin-left: 17.5vw;
+        margin-top: 5vh;
+        top: 0vh;
+        left: 0vw;
+    }
+
+    .card-img {
+        filter: none;
+    }
+    
+    .desc {
+        visibility: visible;
+    }
+}
