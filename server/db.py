@@ -240,7 +240,7 @@ def add_break_in(device_id, API_key):
 
             if "sub" in owner:
                 push_notification(owner["sub"])
-                
+
     return "200"
 
 
@@ -323,8 +323,8 @@ def push_notification(sub):
         webpush(
             subscription_info=sub,
             data=json.dumps({
-                "title": "Welcome!",
-                "body": "Yes, it works!",
+                "title": "Itrusion occured",
+                "body": "Break in occured in a device near you",
                 "icon": "static/images/logo.png"
             }),
             vapid_private_key=PRIVATE,
