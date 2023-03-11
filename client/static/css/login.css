@@ -113,3 +113,30 @@ input[type=text], input[type=password] {
 
 }
 
+@media (max-width: 768px){
+    .homepage-heading{
+        display:inline-block;
+        text-align: center;
+        color: white;
+        font-size: 5em;
+        font-family: "Noto Sans JP", sans-serif;
+        margin: 0 0em;
+    }
+
+    .homepage-subtitle{
+        position: relative;
+        max-width: 95vw;
+        width: 95vw;
+        text-align: center;
+        font-size: 3.5em;
+        margin-top: 12.5vh;
+    }
+    
+    .homepage-text{
+        position: relative;
+        max-width: 95vw;
+        width: 95vw;
+        text-align: center;
+        font-size: 2em;
+    }
+}
