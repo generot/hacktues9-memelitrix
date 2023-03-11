@@ -58,3 +58,9 @@ input[type=text] {
     border-bottom-width: 1px;
     background-color: transparent;
 }
+
+@media (max-width: 1000px){
+    .map {
+        height:83.5vh;
+    }
+}

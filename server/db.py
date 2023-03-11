@@ -25,6 +25,8 @@ devices = db["devices"]
 
 def generate_random_string():
     characters = string.ascii_letters + string.digits + string.punctuation
+    characters = characters.replace("$", "")
+    print(characters)
     return ''.join(random.choice(characters) for i in range(20))
 
 
@@ -114,9 +116,7 @@ def add_device(id, owner_id, lat, lon):
             'lon': lon, 'API_key': str(API_key)}
     )
 
-    print(str(API_key))
-
-    return str(API_key)
+   return str(API_key)
 
 
 def dist(lat1, lon1, lat2, lon2):

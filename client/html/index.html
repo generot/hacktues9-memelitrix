@@ -8,12 +8,20 @@
         <title>HARD</title>
         <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
 
+        <!-- 
         <script defer src="{{ url_for('static', filename='/js/requests/js') }}"></script>
         <script defer src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
         <script defer src="{{ url_for('static', filename='/js/signout.js') }}"></script>
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/index.css') }}">
+        -->
+        <script defer src="../static/js/requests.js"></script>
+        <script defer src="../static/js/profile_details.js"></script>
+        <script defer src="../static/js/signout.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/index.css">
     </head>
 
     <body>
@@ -78,8 +86,20 @@
                 <li> <h4> Сървър - Python Flask и MongoDB. </h4></li>	
                 <li> <h4> Функционалности и връзка с уебсайта - JavaScript и TomTom API. </h4></li>	
                 <li> <h4> Разработка на мобилното приложение - MIT App Inventor. </h4></li>	
-                <li> <h4> Визията на сайта - HTML, CSS, JavaScript и Bootstrap. </h4></li>	
+                <li> <h4> Визията на сайта - HTML, CSS и JavaScript. </h4></li>	
             </ul>
+        </div>
+
+        <div class="imgs">
+            <img src="{{ url_for('static', filename='/images/html.png') }}"> 
+            <img src="{{ url_for('static', filename='/images/css.png') }}"> 
+            <img src="{{ url_for('static', filename='/images/js.png') }}"> <br>
+
+            <div class="bottom-imgs">
+                <img src="{{ url_for('static', filename='/images/esp.png') }}"> 
+                <img src="{{ url_for('static', filename='/images/python.png') }}"> 
+                <img src="{{ url_for('static', filename='/images/mongodb.png') }}"> <br>
+            </div>
         </div>
 
     </body>
