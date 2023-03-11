@@ -28,7 +28,7 @@ function InitMarker(longitude, latitude, class_name) {
 }
 
 async function getPoints(device_id) {
-    let query = queryStringParams("http://127.0.0.1:80/getBreakIns", [
+    let query = queryStringParams("/getBreakIns", [
         ["id", device_id],
         ["API_key", API_KEY],
     ]);

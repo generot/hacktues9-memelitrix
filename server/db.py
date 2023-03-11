@@ -245,12 +245,12 @@ def add_break_in(device_id, API_key):
     devices.update_one(device_schema, values)
     
     for i in devices.find({}):
-        #if dist(i["lat"], i["lon"], device["lat"], device["lon"]) < 9999999:
-        owner_shema = {"_id": ObjectId(i["owner_id"])}
-        owner = users.find_one(owner_shema)
+        if dist(i["lat"], i["lon"], device["lat"], device["lon"]) < 0.1:
+            owner_shema = {"_id": ObjectId(i["owner_id"])}
+            owner = users.find_one(owner_shema)
 
-        if "sub" in owner:
-            push_notification(owner["sub"])
+            if "sub" in owner:
+                push_notification(owner["sub"])
 
     return "200"
 
@@ -316,10 +316,11 @@ def get_devices_for_user(API_key):
         device_schema = {"id" : i}
 
         device = devices.find_one(device_schema)
-        if "last_break_in" in device:
-            dates.append(device["last_break_in"])
-        else:
-            dates.append(None)
+        if device != None:
+            if "last_break_in" in device:
+                dates.append(device["last_break_in"])
+            else:
+                dates.append(None)
 
     return {"code": 200, "message": "Successfully GOT the owned devices for user", "device_ids": user["device_ids"], "date": dates}
 

@@ -20,10 +20,6 @@ def home():
     return render_template("index.html")
 
 
-@views.route("/auth")
-def auth():
-    return render_template("auth.html")
-
 @views.route("/test")
 def test():
     return render_template("test.html")
@@ -76,15 +72,6 @@ def login():
     password = data["password"]
 
     a = db.check_user(username, password)
-    return a
-
-@views.route("/_login", methods=["POST"])
-def _login():
-    data = request.args.to_dict()
-    username = data["username"]
-    password = data["password"]
-
-    a = db._check_user(username, password)
     return a
 
 
@@ -177,3 +164,25 @@ def add_sub_to_user():
     API_key = json.loads(request.form["API_key"])
 
     return db.add_sub_key(API_key, sub)
+
+
+@views.route("/push", methods=["POST"])
+def push():
+    sub = json.loads(request.form["sub"])
+
+    result = "OK"
+    try:
+        webpush(
+            subscription_info=sub,
+            data=json.dumps({
+                "title": "Welcome!",
+                "body": "Yes, it works!",
+                "icon": "static/images/logo.png"
+            }),
+            vapid_private_key=PRIVATE,
+            vapid_claims={"sub": SUBJECT}
+        )
+    except WebPushException as ex:
+        print(ex)
+        result = "FAILED"
+    return result
