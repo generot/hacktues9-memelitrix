@@ -20,9 +20,9 @@ def home():
     return render_template("index.html")
 
 
-@views.route("/test")
+@views.route("/auth")
 def test():
-    return render_template("test.html")
+    return render_template("auth.html")
 
 
 @views.route("/map")
