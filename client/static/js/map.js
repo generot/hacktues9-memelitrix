@@ -136,6 +136,43 @@ main()
 const closeDrawer = document.querySelector('.drawer-close-action')
 const menuTrigger = document.querySelector('.menu-trigger')
 const drawer = document.querySelector('.drawer')
+const deviceList = document.querySelector('.device-list')
+
+const createDevice = (id, status) => {
+    const device = document.createElement('li')
+    const icon = document.createElement('img')
+    const info = document.createElement('div')
+    const deviceIdInfo = document.createElement('p')
+    const deviceStatusInfo = document.createElement('p')
+    const deviceId = document.createElement('b')
+    const deviceStatus = document.createElement('b')
+    device.className = 'device-item'
+    icon.className = 'device-item-icon'
+    icon.src = '/static/images/device.png'
+    icon.alt = 'device icon'
+    info.className = 'device-item-info'
+    deviceIdInfo.className = 'device-item-name'
+    deviceStatusInfo.className = 'device-item-status'
+    deviceStatus.className = 'device-item-status-type '
+    // tuk moje da e 'success' ili 'error'
+    deviceStatus.classList.add('success')
+    deviceStatus.innerText = status
+    deviceId.className = 'device-item-id'
+    deviceId.innerText = id
+    deviceIdInfo.innerText = 'Device:'
+    deviceIdInfo.appendChild(deviceId)
+    deviceStatusInfo.innerText = 'Status:'
+    deviceStatusInfo.appendChild(deviceStatus)
+    info.appendChild(deviceIdInfo)
+    info.appendChild(deviceStatusInfo)
+    device.appendChild(icon)
+    device.appendChild(info)
+    device.addEventListener('click', () => console.log(id, status))
+    return device
+}
+
+deviceList.appendChild(createDevice('25619', "huj"))
+deviceList.appendChild(createDevice('25419', "huj12"))
 
 closeDrawer.addEventListener('click', () => {
     drawer.classList.add('hidden')
