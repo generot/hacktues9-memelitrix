@@ -28,6 +28,7 @@ body {
 
 .desc {
 	visibility: hidden;
+    margin-left: 2vw;
 }
 
 @media (min-width: 1000px){
@@ -68,6 +69,5 @@ body {
     
     .desc {
         visibility: visible;
-        text-align: center;
     }
 }
