@@ -73,7 +73,7 @@ def _check_user(username, password):
                 'sha256', password, salt, 100000)
 
             if i["password"] == password_hash:
-                return str(i["API_key"])
+                return str(i["_id"])
             else:
                 return "null"
 
@@ -104,7 +104,7 @@ def verify_user_db(username):
 def add_device(id, owner_id, lat, lon):
     for i in devices.find({}):
         if i["id"] == id:
-            return "400"
+            return "null"
 
     API_key = generate_random_string()
 
@@ -113,7 +113,7 @@ def add_device(id, owner_id, lat, lon):
             'lon': lon, 'API_key': str(API_key)}
     )
 
-    return "200"
+    return str(API_key)
 
 
 def dist(lat1, lon1, lat2, lon2):
@@ -194,13 +194,13 @@ def get_device_by_ID(id):
 
 def add_owner(device_id, owner_id):
     if check_device_api_key(get_device_API_key_by_ID(device_id)) == 0:
-        return "403"
+        return "null"
 
     if check_owner(owner_id) == 0:
-        return "404"
+        return "null"
 
     if check_device(device_id) == 0:
-        return "404"
+        return "null"
 
     device_schema = {"id": device_id}
     owner_schema = {"_id": ObjectId(owner_id)}
@@ -222,14 +222,14 @@ def add_owner(device_id, owner_id):
 
 def add_break_in(device_id, API_key):
     if check_device(device_id, False) == 0:
-        return "404"
+        return "null"
     
     if check_device_api_key(API_key) == 0:
-        return "403"
+        return "null"
 
     device = get_device_by_ID(device_id)
     if device["API_key"] != API_key:
-        return "403"
+        return "null"
 
     break_ins.insert_one({"device_id": device["id"], "owner_id": device["owner_id"],"lat": device["lat"], "lon": device["lon"]})
     
@@ -237,8 +237,10 @@ def add_break_in(device_id, API_key):
         if dist(i["lat"], i["lon"], device["lat"], device["lon"]) < 0.1:
             owner_shema = {"_id": ObjectId(device["owner_id"])}
             owner = users.find_one(owner_shema)
-            if owner != None:
+
+            if "sub" in owner:
                 push_notification(owner["sub"])
+                
     return "200"
 
 

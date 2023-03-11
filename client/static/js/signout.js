@@ -1,19 +1,18 @@
-let login_el = document.getElementById("login_drop");
-let register_el = document.getElementById("register_drop");
-
-let sign_out_el = document.getElementById("sign_drop");
+let auth_el = document.getElementById("nav-auth");
+let sign_out_el = document.getElementById("nav-sign-out");
+let map_el = document.getElementById("nav-map");
 
 let logged = localStorage.getItem("API_KEY");
 
-console.log(logged);
 if(logged != null && logged != undefined && logged != NaN){
+	auth_el.style.display="none";
+	map_el.style.display="inline-block";
 	sign_out_el.style.display="inline-block";
-	login_el.style.display="none";
-	register_el.style.display="none";
 }
 
 function signout(){
 	localStorage.clear();
+    window.location.href = '/';
 }
 
 sign_out_el.addEventListener("click", signout);

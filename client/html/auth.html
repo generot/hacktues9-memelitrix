@@ -1,15 +1,70 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="../static/style.css" />
-        <link rel="stylesheet" href="../static/auth.css" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>HARD</title>
+        <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
+
+        <script defer src="{{ url_for('static', filename='js/auth.js') }}"></script>
+        <script defer src="{{ url_for('static', filename='js/requests.js') }}"></script>
+        <script defer src="{{ url_for('static', filename='js/perm_sw.js') }}"></script>
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/index.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/auth.css') }}" >
     </head>
+
     <body>
+        <nav class="navigation-bar">
+            <ul class="navigation-route-list">
+                <li class="navigation-route-item">
+                    <a href="https://github.com/generot/hacktues9-memelitrix">
+                        <img src="{{ url_for('static', filename='/images/github.png') }}" alt="github icon">
+                        <p>GitHub</p>
+                    </a>
+                </li>
+
+                <li class="navigation-route-item">
+                    <a href="/">
+                        <img src="{{ url_for('static', filename='/images/home.png') }}" alt="home icon">
+                        <p>Home</p>
+                    </a>
+                </li>
+
+                <li class="navigation-route-item">
+                    <a href="/about_us">
+                        <img src="{{ url_for('static', filename='/images/about_us.png') }}" alt="about us icon" />
+                        <p>About us</p>
+                    </a>
+                </li>
+
+                <li class="navigation-route-item active" id="nav-auth">
+                    <a>
+                        <img src="{{ url_for('static', filename='/images/auth.png') }}" alt="auth icon" />
+                        <p>Authenticate</p>
+                    </a>
+                </li>
+
+                <li class="navigation-route-item" id="nav-map" style="display:none;">
+                    <a href="/map">
+                        <img src="{{ url_for('static', filename='/images/map.png') }}" alt="map icon" />
+                        <p>Map</p>
+                    </a>
+                </li>
+
+                <li class="navigation-route-item" id="nav-sign-out" style="display:none;">
+                    <a>
+                        <img src="{{ url_for('static', filename='/images/sign_out.png') }}" alt="auth icon" />
+                        <p>Sign out</p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+
         <div class="auth-form-container">
             <form class="auth-form">
                 <h1 class="header"></h1>
@@ -17,23 +72,24 @@
                     <label for="username">Username</label>
                     <input id="username" type="text" />
                 </div>
+
                 <div id="password-field" class="text-field">
                     <label for="password">Password</label>
                     <input id="password" type="password" />
                 </div>
+
                 <div id="confirm-password-field" class="text-field">
                     <label for="confirm-password">Confirm Password</label>
                     <input id="confirm-password" type="password" />
                 </div>
+
                 <p class="auth-hint">
                     Already have an account
-                    <a href="/html/auth?mode=SIGN_IN">Sign in.</a>
+                    <a href="/auth?mode=SIGN_IN">Sign in.</a>
                 </p>
                 <button id="auth-submit" type="submit" class="button"></button>
             </form>
         </div>
-        <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/requests.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/perm_sw.js') }}"></script>
+
     </body>
 </html>

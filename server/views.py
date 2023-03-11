@@ -87,6 +87,7 @@ def _login():
     a = db._check_user(username, password)
     return a
 
+
 @views.route("/verify", methods=["GET"])
 def verify_user():
     data = request.args.to_dict()
