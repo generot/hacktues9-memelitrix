@@ -174,7 +174,6 @@ def add_sub_to_user():
 
     return db.add_sub_key(API_key, sub)
 
-
 @views.route("/push", methods=["POST"])
 def push():
     sub = json.loads(request.form["sub"])
