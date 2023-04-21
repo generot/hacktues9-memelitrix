@@ -1,105 +1,103 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>HARD</title>
-        <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
+		<title>HARD</title>
+		<link rel="icon" href="../static/images/logo.png" type="image/x-icon" />
 
-        <!-- 
-        <script defer src="{{ url_for('static', filename='/js/requests/js') }}"></script>
-        <script defer src="{{ url_for('static', filename='/js/profile_details.js') }}"></script>
-        <script defer src="{{ url_for('static', filename='/js/signout.js') }}"></script>
-
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/index.css') }}">
-        -->
-        <script defer src="../static/js/requests.js"></script>
+		<!-- 
+        <script defer src="../static/js/requests/js"></script>
         <script defer src="../static/js/profile_details.js"></script>
         <script defer src="../static/js/signout.js"></script>
 
         <link rel="stylesheet" type="text/css" href="../static/css/style.css">
         <link rel="stylesheet" type="text/css" href="../static/css/index.css">
-    </head>
+        -->
+		<script defer src="../static/js/requests.js"></script>
+		<script defer src="../static/js/profile_details.js"></script>
+		<script defer src="../static/js/signout.js"></script>
 
-    <body>
-        <nav class="navigation-bar">
-            <ul class="navigation-route-list">
-                <li class="navigation-route-item">
-                    <a href="https://github.com/generot/hacktues9-memelitrix">
-                        <img src="{{ url_for('static', filename='/images/github.png') }}" alt="github icon">
-                        <p>GitHub</p>
-                    </a>
-                </li>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/index.css" />
+	</head>
 
-                <li class="navigation-route-item active">
-                    <a>
-                        <img src="{{ url_for('static', filename='/images/home.png') }}" alt="home icon">
-                        <p>Home</p>
-                    </a>
-                </li>
+	<body>
+		<nav class="navigation-bar">
+			<ul class="navigation-route-list">
+				<li class="navigation-route-item">
+					<a href="https://github.com/generot/hacktues9-memelitrix">
+						<img src="../static/images/github.png" alt="github icon" />
+						<p>GitHub</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item">
-                    <a href="/about_us">
-                        <img src="{{ url_for('static', filename='/images/about_us.png') }}" alt="about us icon" />
-                        <p>About us</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item active">
+					<a>
+						<img src="../static/images/home.png" alt="home icon" />
+						<p>Home</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item" id="nav-auth">
-                    <a href="/auth">
-                        <img src="{{ url_for('static', filename='/images/auth.png') }}" alt="auth icon" />
-                        <p>Authenticate</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item">
+					<a href="/about_us">
+						<img src="../static/images/about_us.png" alt="about us icon" />
+						<p>About us</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item" id="nav-map" style="display:none;">
-                    <a href="/map">
-                        <img src="{{ url_for('static', filename='/images/map.png') }}" alt="map icon" />
-                        <p>Map</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item" id="nav-auth">
+					<a href="/auth">
+						<img src="../static/images/auth.png" alt="auth icon" />
+						<p>Authenticate</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item" id="nav-sign-out" style="display:none;">
-                    <a>
-                        <img src="{{ url_for('static', filename='/images/sign_out.png') }}" alt="auth icon" />
-                        <p>Sign out</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item" id="nav-map" style="display: none">
+					<a href="/map">
+						<img src="../static/images/map.png" alt="map icon" />
+						<p>Map</p>
+					</a>
+				</li>
 
-            </ul>
-        </nav>
+				<li class="navigation-route-item" id="nav-sign-out" style="display: none">
+					<a>
+						<img src="../static/images/sign_out.png" alt="auth icon" />
+						<p>Sign out</p>
+					</a>
+				</li>
+			</ul>
+		</nav>
 
-        <div class="description">
-            <h1 > HomeguARD </h1>
-            <h3 > HomeguARD е иновативна система за сигурност, разработена от отбора Memelitrix за HackTUES 9. <br><br>
-                Системата използва съвкупност от сензори, засичащи
-                всяко потенциално неоторизирано влизане във Вашата собственост. Отчетените нарушения биват изпратени към сървър, запазвайки информация за
-                съответната нередност и сигнализирайки околните HARD системи за налична опасност. <br><br>
-                <b> Използваните технологии включват:</b><br> 
-            </h3>
+		<div class="description">
+			<h1>HomeguARD</h1>
+			<h3>
+				HomeguARD е иновативна система за сигурност, разработена от отбора Memelitrix за HackTUES 9. <br /><br />
+				Системата използва съвкупност от сензори, засичащи всяко потенциално неоторизирано влизане във Вашата собственост. Отчетените нарушения биват изпратени към сървър, запазвайки информация за съответната нередност и сигнализирайки околните HARD системи за налична опасност. <br /><br />
+				<b> Използваните технологии включват:</b><br />
+			</h3>
 
-            <ul> 
-                <li> <h4> Физическо засичане на влизане с взлом - лазерна система и инфрачервен сензор, свързани към ESP32 микроконтролер. </h4></li>	
-                <li> <h4> Сървър - Python Flask и MongoDB. </h4></li>	
-                <li> <h4> Функционалности и връзка с уебсайта - JavaScript и TomTom API. </h4></li>	
-                <li> <h4> Разработка на мобилното приложение - MIT App Inventor. </h4></li>	
-                <li> <h4> Визията на сайта - HTML, CSS и JavaScript. </h4></li>	
-            </ul>
-        </div>
+			<ul>
+				<li><h4>Физическо засичане на влизане с взлом - лазерна система и инфрачервен сензор, свързани към ESP32 микроконтролер.</h4></li>
+				<li><h4>Сървър - Python Flask и MongoDB.</h4></li>
+				<li><h4>Функционалности и връзка с уебсайта - JavaScript и TomTom API.</h4></li>
+				<li><h4>Разработка на мобилното приложение - MIT App Inventor.</h4></li>
+				<li><h4>Визията на сайта - HTML, CSS и JavaScript.</h4></li>
+			</ul>
+		</div>
 
-        <div class="imgs">
-            <img src="{{ url_for('static', filename='/images/html.png') }}"> 
-            <img src="{{ url_for('static', filename='/images/css.png') }}"> 
-            <img src="{{ url_for('static', filename='/images/js.png') }}"> <br>
+		<div class="imgs">
+			<img src="../static/images/html.png" />
+			<img src="../static/images/css.png" />
+			<img src="../static/images/js.png" /> <br />
 
-            <div class="bottom-imgs">
-                <img src="{{ url_for('static', filename='/images/esp.png') }}"> 
-                <img src="{{ url_for('static', filename='/images/python.png') }}"> 
-                <img src="{{ url_for('static', filename='/images/mongodb.png') }}"> <br>
-            </div>
-        </div>
-
-    </body>
+			<div class="bottom-imgs">
+				<img src="../static/images/esp.png" />
+				<img src="../static/images/python.png" />
+				<img src="../static/images/mongodb.png" /> <br />
+			</div>
+		</div>
+	</body>
+</html>
