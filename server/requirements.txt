@@ -1,0 +1,6 @@
+ecdsa==0.18.0
+Flask==2.2.2
+Flask_Cors==3.0.10
+pymongo==4.3.3
+python-dotenv==1.0.0
+pywebpush==1.14.0

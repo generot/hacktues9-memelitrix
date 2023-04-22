@@ -1,105 +1,103 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>HARD</title>
-        <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
+		<title>HARD</title>
+		<link rel="icon" href="../static/images/logo.png" type="image/x-icon" />
 
-        <!--
-        <script defer src="{{ url_for('static', filename='js/auth.js') }}"></script>
-        <script defer src="{{ url_for('static', filename='js/requests.js') }}"></script>
-        <script defer src="{{ url_for('static', filename='js/perm_sw.js') }}"></script>
-
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/index.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/auth.css') }}" >
-        -->
-
-        <script defer src="../static/js/auth.js"></script>
-        <script defer src="../static/js/requests.js"></script>
-        <script defer src="../static/js/perm_sw.js"></script>
+		<!--
+        <script defer src="../staticjs/auth.js"></script>
+        <script defer src="../staticjs/requests.js"></script>
+        <script defer src="../staticjs/perm_sw.js"></script>
 
         <link rel="stylesheet" type="text/css" href="../static/css/style.css">
         <link rel="stylesheet" type="text/css" href="../static/css/index.css">
-        <link rel="stylesheet" type="text/css" href="../static/css/auth.css">
-    </head>
+        <link rel="stylesheet" type="text/css" href="../static/css/auth.css" >
+        -->
 
-    <body>
-        <nav class="navigation-bar">
-            <ul class="navigation-route-list">
-                <li class="navigation-route-item">
-                    <a href="https://github.com/generot/hacktues9-memelitrix">
-                        <img src="{{ url_for('static', filename='/images/github.png') }}" alt="github icon">
-                        <p>GitHub</p>
-                    </a>
-                </li>
+		<script defer src="../static/js/auth.js"></script>
+		<script defer src="../static/js/requests.js"></script>
+		<script defer src="../static/js/perm_sw.js"></script>
 
-                <li class="navigation-route-item">
-                    <a href="/">
-                        <img src="{{ url_for('static', filename='/images/home.png') }}" alt="home icon">
-                        <p>Home</p>
-                    </a>
-                </li>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/auth.css" />
+	</head>
 
-                <li class="navigation-route-item">
-                    <a href="/about_us">
-                        <img src="{{ url_for('static', filename='/images/about_us.png') }}" alt="about us icon" />
-                        <p>About us</p>
-                    </a>
-                </li>
+	<body>
+		<nav class="navigation-bar">
+			<ul class="navigation-route-list">
+				<li class="navigation-route-item">
+					<a href="https://github.com/generot/hacktues9-memelitrix">
+						<img src="../static/images/github.png" alt="github icon" />
+						<p>GitHub</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item active" id="nav-auth">
-                    <a>
-                        <img src="{{ url_for('static', filename='/images/auth.png') }}" alt="auth icon" />
-                        <p>Authenticate</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item">
+					<a href="/">
+						<img src="../static/images/home.png" alt="home icon" />
+						<p>Home</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item" id="nav-map" style="display:none;">
-                    <a href="/map">
-                        <img src="{{ url_for('static', filename='/images/map.png') }}" alt="map icon" />
-                        <p>Map</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item">
+					<a href="/about_us">
+						<img src="../static/images/about_us.png" alt="about us icon" />
+						<p>About us</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item" id="nav-sign-out" style="display:none;">
-                    <a>
-                        <img src="{{ url_for('static', filename='/images/sign_out.png') }}" alt="auth icon" />
-                        <p>Sign out</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item active" id="nav-auth">
+					<a>
+						<img src="../static/images/auth.png" alt="auth icon" />
+						<p>Authenticate</p>
+					</a>
+				</li>
 
-            </ul>
-        </nav>
+				<li class="navigation-route-item" id="nav-map" style="display: none">
+					<a href="/map">
+						<img src="../static/images/map.png" alt="map icon" />
+						<p>Map</p>
+					</a>
+				</li>
 
-        <div class="auth-form-container">
-            <form class="auth-form">
-                <h1 class="header"></h1>
-                <div id="username-field" class="text-field">
-                    <label for="username">Username</label>
-                    <input id="username" type="text" />
-                </div>
+				<li class="navigation-route-item" id="nav-sign-out" style="display: none">
+					<a>
+						<img src="../static/images/sign_out.png" alt="auth icon" />
+						<p>Sign out</p>
+					</a>
+				</li>
+			</ul>
+		</nav>
 
-                <div id="password-field" class="text-field">
-                    <label for="password">Password</label>
-                    <input id="password" type="password" />
-                </div>
+		<div class="auth-form-container">
+			<form class="auth-form">
+				<h1 class="header"></h1>
+				<div id="username-field" class="text-field">
+					<label for="username">Username</label>
+					<input id="username" type="text" />
+				</div>
 
-                <div id="confirm-password-field" class="text-field">
-                    <label for="confirm-password">Confirm Password</label>
-                    <input id="confirm-password" type="password" />
-                </div>
+				<div id="password-field" class="text-field">
+					<label for="password">Password</label>
+					<input id="password" type="password" />
+				</div>
 
-                <p class="auth-hint">
-                    Already have an account
-                    <a href="/auth?mode=SIGN_IN">Sign in.</a>
-                </p>
-                <button id="auth-submit" type="submit" class="button"></button>
-            </form>
-        </div>
+				<div id="confirm-password-field" class="text-field">
+					<label for="confirm-password">Confirm Password</label>
+					<input id="confirm-password" type="password" />
+				</div>
 
-    </body>
+				<p class="auth-hint">
+					Already have an account
+					<a href="/auth?mode=SIGN_IN">Sign in.</a>
+				</p>
+				<button id="auth-submit" type="submit" class="button"></button>
+			</form>
+		</div>
+	</body>
 </html>

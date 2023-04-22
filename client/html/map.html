@@ -1,98 +1,95 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>HARD</title>
-        <link rel="icon" href="{{ url_for('static', filename='/images/logo.png') }}" type="image/x-icon">
+		<title>HARD</title>
+		<link rel="icon" href="../static/images/logo.png" type="image/x-icon" />
 
-        <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
-        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
+		<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
 
-        <!--
-        <script defer src="{{ url_for('static', filename='/js/requests.js') }}"></script>
-        <script defer src="{{ url_for('static', filename='/js/map.js') }}"></script>
-        <script defer src="{{ url_for('static', filename='/js/signout.js') }}"></script>
-
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/map.css') }}">
-        -->
-
+		<!--
         <script defer src="../static/js/requests.js"></script>
         <script defer src="../static/js/map.js"></script>
         <script defer src="../static/js/signout.js"></script>
 
         <link rel="stylesheet" type="text/css" href="../static/css/style.css">
         <link rel="stylesheet" type="text/css" href="../static/css/map.css">
-    </head>
+        -->
 
-    <body >
-        <nav class="navigation-bar">
-            <ul class="navigation-route-list">
-                <li class="navigation-route-item">
-                    <a href="https://github.com/generot/hacktues9-memelitrix">
-                        <img src="{{ url_for('static', filename='/images/github.png') }}" alt="github icon">
-                        <p>GitHub</p>
-                    </a>
-                </li>
+		<script defer src="../static/js/requests.js"></script>
+		<script defer src="../static/js/map.js"></script>
+		<script defer src="../static/js/signout.js"></script>
 
-                <li class="navigation-route-item">
-                    <a href="/">
-                        <img src="{{ url_for('static', filename='/images/home.png') }}" alt="home icon">
-                        <p>Home</p>
-                    </a>
-                </li>
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/map.css" />
+	</head>
 
-                <li class="navigation-route-item">
-                    <a href="/about_us">
-                        <img src="{{ url_for('static', filename='/images/about_us.png') }}" alt="about us icon" />
-                        <p>About us</p>
-                    </a>
-                </li>
+	<body>
+		<nav class="navigation-bar">
+			<ul class="navigation-route-list">
+				<li class="navigation-route-item">
+					<a href="https://github.com/generot/hacktues9-memelitrix">
+						<img src="../static/images/github.png" alt="github icon" />
+						<p>GitHub</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item" id="nav-auth">
-                    <a href="/auth">
-                        <img src="{{ url_for('static', filename='/images/auth.png') }}" alt="auth icon" />
-                        <p>Authenticate</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item">
+					<a href="/">
+						<img src="../static/images/home.png" alt="home icon" />
+						<p>Home</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item active" id="nav-map">
-                    <a>
-                        <img src="{{ url_for('static', filename='/images/map.png') }}" alt="map icon" />
-                        <p>Map</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item">
+					<a href="/about_us">
+						<img src="../static/images/about_us.png" alt="about us icon" />
+						<p>About us</p>
+					</a>
+				</li>
 
-                <li class="navigation-route-item" id="nav-sign-out" style="display:none;">
-                    <a>
-                        <img src="{{ url_for('static', filename='/images/sign_out.png') }}" alt="auth icon" />
-                        <p>Sign out</p>
-                    </a>
-                </li>
+				<li class="navigation-route-item" id="nav-auth">
+					<a href="/auth">
+						<img src="../static/images/auth.png" alt="auth icon" />
+						<p>Authenticate</p>
+					</a>
+				</li>
 
-            </ul>
-        </nav>
+				<li class="navigation-route-item active" id="nav-map">
+					<a>
+						<img src="../static/images/map.png" alt="map icon" />
+						<p>Map</p>
+					</a>
+				</li>
 
-        <div class="map" id="map"></div>
+				<li class="navigation-route-item" id="nav-sign-out" style="display: none">
+					<a>
+						<img src="../static/images/sign_out.png" alt="auth icon" />
+						<p>Sign out</p>
+					</a>
+				</li>
+			</ul>
+		</nav>
 
-        <button class="menu-trigger button">
-            <img src="{{ url_for('static', filename='/images/gear.png') }}" alt="menu icon" />
-        </button>
+		<div class="map" id="map"></div>
 
-        <div class="drawer hidden">
-            <div class="drawer-actions">
-                <button class="drawer-close-action">
-                    <img src="{{ url_for('static', filename='/images/close.png') }}" alt="close icon" />
-                </button>
-            </div>
+		<button class="menu-trigger button">
+			<img src="../static/images/gear.png" alt="menu icon" />
+		</button>
 
-            <p class="device-list-label">Devices</p>
-            <ul class="device-list"></ul>
-        </div>
+		<div class="drawer hidden">
+			<div class="drawer-actions">
+				<button class="drawer-close-action">
+					<img src="../static/images/close.png" alt="close icon" />
+				</button>
+			</div>
 
-    </body>
-
+			<p class="device-list-label">Devices</p>
+			<ul class="device-list"></ul>
+		</div>
+	</body>
 </html>
