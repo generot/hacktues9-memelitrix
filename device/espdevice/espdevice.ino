@@ -19,6 +19,7 @@
 
 #define PIN_PIR1 25
 #define PIN_LASER 26
+#define PIN_VOLDIV 27
 
 enum bl_resp_type {
   BL_WIFI_CRED = 'W',
@@ -182,6 +183,8 @@ bool post(const char* server_url, const char *route, const char *data, int datal
   
   Serial.println("Sending POST request...");
   int con_status = client.connect(server_url, SERVER_PORT);
+
+  Serial.println(String(server_url) + String(route));
   
   if(con_status) {
     //POST request form
@@ -270,22 +273,6 @@ bool read_client_response(void) {
 }
 
 //========================BACKEND HANDLING=============================
-
-void setup1() {
-  Serial.begin(BAUD_RATE);
-  
-  delay(500);
-  while(!Serial) { ; }
-
-  Serial.println("Ready...");
-
-  pinMode(PIN_LASER, OUTPUT);
-  digitalWrite(PIN_LASER, HIGH);
-}
-
-void loop1() {
-  
-}
 
 void setup() {
   Serial.begin(BAUD_RATE);
