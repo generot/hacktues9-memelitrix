@@ -76,15 +76,16 @@ form.addEventListener("submit", async (e) => {
     if (Notification.permission === "granted") {
         handleGrantedPermission();
         return;
+    } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+                handleGrantedPermission();
+                return;
+            }
+        });
     }
 
-    const permission = await Notification.requestPermission();
-
-    if (permission === "granted") {
-        handleGrantedPermission();
-        return;
-    }
-    alert("Please allow notifications.");
+    alert("Please allow notifications");
 
     window.location.href = "/map";
 });
