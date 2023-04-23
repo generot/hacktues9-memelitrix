@@ -84,10 +84,9 @@ form.addEventListener("submit", async (e) => {
             }
         });
     }
-    console.log("AAAAAAAAAAA")
     alert("Please allow notifications");
 
-    //window.location.href = "/map";
+    window.location.href = "/map";
 });
 
 function handleGrantedPermission() {
